@@ -1,0 +1,51 @@
+{
+  "invokeDataResponse": [
+    {
+      "invokeId": 2475,
+      "invokerName": "ENRICHMENT_PRE_OPERATION_INVOKE",
+      "invokerOperStageId": "3196",
+      "success": false,
+      "elapsedTime": 282,
+      "code": 10,
+      "message": "No se encontro el ICCID registrado en repositorio eSIM",
+      "externalSubscriberProperties": [
+        {
+          "id": "ICCID",
+          "value": [
+            ""
+          ]
+        },
+        {
+          "id": "CODE",
+          "value": [
+            "0"
+          ]
+        },
+        {
+          "id": "MENSAJE",
+          "value": [
+            "Successful Response"
+          ]
+        },
+        {
+          "id": "ESTADO",
+          "value": [
+            ""
+          ]
+        }
+      ],
+      "request": "\n{\n\n  \"informationService\": \"ESIM:ConsultaICCIDCompleto\",\n  \"inputs\": [\n    {\n      \"key\": \"ICCID\",\n      \"value\": \"8959301001085281965\"\n    },{\n      \"key\": \"ESTADO\",\n      \"value\": \"R\"\n    }\n  ]\n\n}\n",
+      "response": "{\"code\":0,\"status\":\"OK\",\"message\":\"Successful Response\",\"response\":[],\"internalCorrelationId\":\"e10af0f5-f6f0-4b5b-8684-922c449c833a\"}",
+      "responseHeader": "{\"date\":[\"Thu, 25 Jul 2024 22:08:20 GMT\"],\"server_name\":[\"dc-micro-jeis-silver-2-k6zw2\"],\"transfer-encoding\":[\"chunked\"],\"statusInfo\":[\"OK\"],\"vary\":[\"Access-Control-Request-Headers\",\"Access-Control-Request-Method\",\"Origin\"],\"x-internal-trx-id\":[\"e10af0f5-f6f0-4b5b-8684-922c449c833a\"],\"content-type\":[\"application/json;charset\\u003dUTF-8\"],\"ip_server\":[\"10.238.2.8\"],\"x-client-name\":[\"null\"],\"status\":[\"200\"]}",
+      "ticket": "d794d259-75d7-44ba-82c1-a31e5056cf64",
+      "startingDate": "Jul 25, 2024, 5:08:20 PM",
+      "endingDate": "Jul 25, 2024, 5:08:20 PM",
+      "externalTransactionId": "bf9491b2-0573-4001-89fa-ad9923b16090",
+      "customerInvokeId": "d794d259-75d7-44ba-82c1-a31e5056cf64",
+      "retriesCount": 0,
+      "endpointUrl": "http://micro-jeis-silver.router-default.apps.aro-dev.conecel.com/microjeis/resources/ws/eipConsumeServicioMicroEis",
+      "httpMethod": "POST",
+      "headers": []
+    }
+  ]
+}

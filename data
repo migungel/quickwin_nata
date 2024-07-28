@@ -1,0 +1,18 @@
+[
+  {
+    "responseAlias": "FUNCTION_EXECUTION_STATUS",
+    "subscriberPropertyId": "STATUS"
+  },
+  {
+    "responseAlias": "EID",
+    "subscriberPropertyId": "EID"
+  },
+  {
+    "responseAlias": "MATCHING_ID",
+    "subscriberPropertyId": "MATCHING_ID"
+  },
+  {
+    "responseAlias": "SMDP_ADDRESS",
+    "subscriberPropertyId": "SMDP_ADDRESS"
+  }
+]

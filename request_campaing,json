@@ -1,0 +1,91 @@
+{
+  "commonHeaderRequest": {
+    "channelInfo": {
+      "channelId": "",
+      "mediaDetailId": "",
+      "mediaId": ""
+    },
+    "consumerInfo": {
+      "companyId": "",
+      "consumerType": "",
+      "consumerId": "",
+      "terminal": ""
+    },
+    "geolocationInfo": {
+      "location": {
+        "latitude": "",
+        "longitude": ""
+      }
+    },
+    "operationInfo": {
+      "externalOperation": "confirmOrder",
+      "externalTransactionDate": "22/09/2022 12:07:05",
+      "externalTransactionId": "bf9491b2-0573-4001-89fa-ad9923b16090",
+      "operationId": "confirmOrder",
+      "processingMethod": "SY"
+    }
+  },
+  "body": {
+    "activationInfo": {
+      "offerId": "400136894",
+      "subscription": {
+        "type": "ICCID",
+        "value": "8959301000967633954"
+      },
+      "paymentInfo": {
+        "paymentMethod": {
+          "amount": "",
+          "paymentMethodId": "",
+          "paymentMethodType": ""
+        }
+      },
+      "campaignId": "100056",
+      "sessionData": {
+        "externalSubscriberProperties": [
+          {
+            "id": "ICCID",
+            "value": [
+              "89354010111104000222"
+            ]
+          },
+          {
+            "id": "EID",
+            "value": [
+              "00636856000000000000000000000777"
+            ]
+          },
+          {
+            "id": "MATCHING_ID",
+            "value": [
+              "1234-5678-9ABC"
+            ]
+          },
+          {
+            "id": "CONFIRMATION_CODE",
+            "value": [
+              "1234"
+            ]
+          },
+          {
+            "id": "SMDS_ADDRESS",
+            "value": [
+              "smds.gsma.com"
+            ]
+          },
+          {
+            "id": "RELEASE_FLAG",
+            "value": [
+              "true"
+            ]
+          },
+          {
+            "id": "DISPLAY_PROFILE_NAME",
+            "value": [
+              "new personal optional description"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
