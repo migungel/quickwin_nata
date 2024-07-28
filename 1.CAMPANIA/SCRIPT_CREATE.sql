@@ -9,14 +9,14 @@ DECLARE
   product_type_id1      VARCHAR2(200);
   product_id1           VARCHAR2(200);
   ln_operation_type_id1 VARCHAR2(200) := 'confirmOrder';
-  ln_project_owner      VARCHAR(3000) := 'TIC Manuel Garcia <mgarciar@claro.com.ec>;';
+  ln_project_owner      VARCHAR(3000) := 'TIC Galo Jerez';
   -- PR_SUFFIX CAMBIAR PARA PRUEBAS
   pr_suffix VARCHAR2(11) := 'CLONE1_QW'; -- TEST1_QW
   -- AGREGAR EL STAGE QUE SE DESEA
-  lv_description_campaign VARCHAR(255) := '[QWV1-CPM] '; -- QWV1-MGR
+  lv_description_campaign VARCHAR(255) := '[22385] '; -- QWV1-MGR
   lv_invoke                VARCHAR2(200) := 'OPERATION_INVOKE';
   lv_dynamic_bl           VARCHAR2(200) := 'DYNAMIC_BLOCKING'; --Evalua una condición y si es positiva bloquea
-  lv_description          VARCHAR2(200) := '[22921] CLONE QUICKWIN'; -- TEST QUICKWIN
+  lv_description          VARCHAR2(200) := 'eSIM QR Code'; -- TEST QUICKWIN
   lv_response_properties  VARCHAR2(32767 ) := '[
         {
           "responseAlias":"FUNCTION_EXECUTION_STATUS",
@@ -68,7 +68,7 @@ BEGIN
   VALUES
   (
       ln_campaign_id,
-      lv_description,
+      lv_description_campaign || lv_description,
       lv_description_campaign || lv_description,
       ln_behaviour_id,
       ln_project_owner

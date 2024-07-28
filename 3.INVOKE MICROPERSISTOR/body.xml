@@ -1,0 +1,32 @@
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output  method="text" indent="yes" media-type="text/json" omit-xml-declaration="yes"/>
+  <xsl:template match="/">
+  {
+  <xsl:for-each select="//params">
+    "informationService": "<xsl:value-of select="_informationService"/>",
+    "inputs": [
+      {
+        "key": "ESTADO",
+        "value": "<xsl:value-of select="_estado"/>"
+      },
+      {
+        "key": "COMENTARIOS",
+        "value": "<xsl:value-of select="_comentarios"/>"
+      },
+      {
+        "key": "ICCID",
+        "value": "<xsl:value-of select="_iccid"/>"
+      },
+      {
+        "key": "INFO_QR",
+        "value": "LPA:1$<xsl:value-of select="_smdpAddress"/>$<xsl:value-of select="_matchingId"/>"
+      },
+      {
+        "key":"FECHA_GENERACION_QR",
+        "value": "<xsl:value-of select="_fechaGeneracionQr"/>"
+      }
+    ]
+  </xsl:for-each>
+  }
+  </xsl:template>
+</xsl:stylesheet>

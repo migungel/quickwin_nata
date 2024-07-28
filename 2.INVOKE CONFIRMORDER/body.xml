@@ -1,0 +1,20 @@
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output  method="text" indent="yes" media-type="text/json" omit-xml-declaration="yes"/>
+<xsl:template match="/">
+{
+<xsl:for-each select="//params">
+    "header": {
+        "functionRequesterIdentifier": "<xsl:value-of select="functionRequesterIdentifier"/>",
+        "functionCallIdentifier": "<xsl:value-of select="functionCallIdentifier"/>"
+    },
+    "iccid": "<xsl:value-of select="iccid"/>",
+    "eid": "<xsl:value-of select="eid"/>",
+    "matchingId": "<xsl:value-of select="matchingId"/>",
+    "confirmationCode": "<xsl:value-of select="confirmationCode"/>",
+    "smdsAddress": "<xsl:value-of select="smdsAddress"/>",
+    "releaseFlag": "<xsl:value-of select="releaseFlag"/>",
+    "displayProfileName" : "<xsl:value-of select="displayProfileName"/>"
+</xsl:for-each>
+}
+</xsl:template>
+</xsl:stylesheet>
