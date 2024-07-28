@@ -1,4 +1,4 @@
--- Created on 18/12/2019 by MGARCIAR@CLARO.COM.EC
+-- Created on 29/07/2024 by MGARCIAR@CLARO.COM.EC
 DECLARE
   ln_behaviour_id       NUMBER;
   ln_beh_operation_id   NUMBER;
@@ -16,8 +16,8 @@ DECLARE
   lv_description_campaign VARCHAR(255) := '[QWV1-CPM] '; -- QWV1-MGR
   lv_invoke                VARCHAR2(200) := 'OPERATION_INVOKE';
   lv_dynamic_bl           VARCHAR2(200) := 'DYNAMIC_BLOCKING'; --Evalua una condición y si es positiva bloquea
-  lv_description          VARCHAR2(200) := '[22921] CHANGE PAYMENT METHOD QUICKWIN'; -- TEST QUICKWIN
-  lv_response_properties  VARCHAR2(200) := '[
+  lv_description          VARCHAR2(200) := '[22921] CLONE QUICKWIN'; -- TEST QUICKWIN
+  lv_response_properties  VARCHAR2(32767 ) := '[
         {
           "responseAlias":"FUNCTION_EXECUTION_STATUS",
           "subscriberPropertyId":"STATUS"
