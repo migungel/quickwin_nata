@@ -1,0 +1,19 @@
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output  method="text" indent="yes" media-type="text/json" omit-xml-declaration="yes"/>
+<xsl:template match="/">
+{
+<xsl:for-each select="//params">
+  "informationService": "<xsl:value-of select="_informationService"/>",
+  "inputs": [
+    {
+      "key": "ICCID",
+      "value": "<xsl:value-of select="_ICCID"/>"
+    },{
+      "key": "ESTADO",
+      "value": "<xsl:value-of select="_estado"/>"
+    }
+  ]
+</xsl:for-each>
+}
+</xsl:template>
+</xsl:stylesheet>

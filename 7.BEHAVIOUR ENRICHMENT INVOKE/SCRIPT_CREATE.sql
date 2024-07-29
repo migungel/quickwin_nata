@@ -2,13 +2,12 @@ DECLARE
   -- CONDITIONS
   -- USAR ID DE CONDICION QUE SE NECESITE
   ln_condition_id NUMBER := NULL;
-  ln_operation_type_id1 VARCHAR2(200) := 'confirmOrder';
   ln_campaign_id NUMBER := 100129;
   -- USAR ID DE INVOCADOR QUE SE NECESITE
-  ln_invoke_id NUMBER := 757;
+  ln_invoke_id NUMBER := 3087;
   -- obligatorio definir
-  ln_behaviour_oper_id NUMBER := 718;
-  ln_behaviour_oper_stage_id NUMBER := 3196;
+  ln_behaviour_oper_id NUMBER := 865;
+  ln_behaviour_oper_stage_id NUMBER := 4068;
 
 BEGIN
   -- insertar
@@ -29,15 +28,16 @@ BEGIN
     APPLY_COMPENSATION, 
     INVOKE_ID_COMP_BACKWARD, 
     INVOKE_ID_COMP_FORWARD
-  ) VALUES (
+  ) 
+  VALUES 
+  (
     (SELECT NVL(MAX(T.behaviour_enrichment_id), 0) + 1 
-     FROM behaviour_enrichment T),
+     FROM behaviour_enrichment T
+    ),
     ln_behaviour_oper_stage_id, 
     ln_condition_id, 
     ln_invoke_id, 
-    (SELECT NVL(MAX(T.ORDER_BY), 0) + 10 
-     FROM BEHAVIOUR_ENRICHMENT T 
-     WHERE T.BEHAVIOUR_OPER_STAGE_ID = ln_behaviour_oper_stage_id), 
+    10, 
     'YES', 
     'A', 
     NULL, 

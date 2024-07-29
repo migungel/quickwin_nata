@@ -1,37 +1,23 @@
 {
   "invokeDataResponse": [
     {
-      "invokeId": 3085,
-      "invokerName": "OPERATION_INVOKE",
+      "invokeId": 3087,
+      "invokerName": "ENRICHMENT_PRE_OPERATION_INVOKE",
       "invokerOperStageId": "4068",
       "success": false,
-      "elapsedTime": 11138,
+      "elapsedTime": 1191,
       "code": -31,
-      "message": "Invoke ID: 3085 Error Invoke 3085. ExternalResourceId. 14935, ExternalResourceComponenteId. 15655, Url http://200.95.160.7:8312/gsma/rsp2/es2plus/confirmOrder, Timeout. 11000, Error al llamar POST Rest: http://200.95.160.7:8312/gsma/rsp2/es2plus/confirmOrder java.net.SocketTimeoutException: Connect timed out",
+      "message": "Invoke ID: 3087 Error Invoke 3087. ExternalResourceId. 14937, ExternalResourceComponenteId. 15657, Url http://micro-jeis-silver.router-default.apps.aro-dev.conecel.com/microjeis/resources/ws/eipConsumeServicioMicroEis, Timeout. 1000, Error al llamar POST Rest: http://micro-jeis-silver.router-default.apps.aro-dev.conecel.com/microjeis/resources/ws/eipConsumeServicioMicroEis java.net.SocketTimeoutException: Read timed out",
       "externalSubscriberProperties": [],
       "request": "",
       "response": "",
-      "ticket": "cd68e9df-c86a-4626-be4f-1ad253e09071",
-      "startingDate": "Jul 28, 2024, 7:56:55 PM",
-      "endingDate": "Jul 28, 2024, 7:57:06 PM",
+      "ticket": "72ef765a-f829-4470-9e5f-6c35431fa2ee",
+      "startingDate": "Jul 28, 2024, 10:24:47 PM",
+      "endingDate": "Jul 28, 2024, 10:24:48 PM",
       "externalTransactionId": "bf9491b2-0573-4001-89fa-ad9923b16090",
-      "customerInvokeId": "cd68e9df-c86a-4626-be4f-1ad253e09071",
+      "customerInvokeId": "72ef765a-f829-4470-9e5f-6c35431fa2ee",
       "retriesCount": 0,
-      "headers": [
-        {
-          "id": "Authorization",
-          "value": "WSSE Realm=\"AMXhub\", Profile=\"UsernameToken\""
-        },
-        {
-          "id": "X-WSSE",
-          "value": "UsernameToken Username=\"PA00003022\",PasswordDigest=\"Li2fKU8Ry2vM+hdYRV+8N+mTzfguSBH2EaVrzCQDU5A=\", Nonce=\"7EOuOyzCrxD3tpIAPgyNfQ16ab6\", Created=\"2022-10-03T15:46:29Z\""
-        },
-        {
-          "id": "X-RequestHeader",
-          "value": "request TransId=\"AP20009\", iccidManager=\"ValProdECU\", providerId=\"PA00003432\", AppId=\"AP20009\", AspCallBackUrl=http://181.209.207.33:19315, enterpriseId=\"esimtest\", country=\"ECU\""
-        },
-        { "id": "X-Admin-Protocol", "value": "gsma/rsp/v2.2.0" }
-      ]
+      "headers": []
     }
   ]
 }
