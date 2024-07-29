@@ -1,0 +1,28 @@
+declare
+  INVK_1 NUMBER := :invoke_1;
+  INVK_2 NUMBER := :invoke_2;
+  INVK_3 NUMBER := :invoke_3;
+  
+  LV_ERROR VARCHAR2(500);
+  LE_ERROR EXCEPTION;
+  
+begin
+  begin
+           
+    UPDATE INVOKE  I SET I.STATUS='I' WHERE I.INVOKE_ID IN (INVK_1, INVK_2, INVK_3);     
+    UPDATE BEHAVIOUR_OPER_INVOKE  I SET I.STATUS='I' WHERE I.INVOKE_ID IN (INVK_1, INVK_2, INVK_3); 
+
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('INVOKE_ID_1: ' || INVK_1);
+  DBMS_OUTPUT.PUT_LINE('INVOKE_ID_2: ' || INVK_2);
+  DBMS_OUTPUT.PUT_LINE('INVOKE_ID_3: ' || INVK_3);
+  
+END;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+    ROLLBACK;
+    LV_ERROR := 'Configuracion QuickWin-Error: ' || SQLERRM || '.' || to_char(SQLCODE);
+    RAISE LE_ERROR;  
+
+  END;
