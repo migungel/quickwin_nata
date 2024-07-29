@@ -17,7 +17,7 @@ DECLARE
   lv_invoke                VARCHAR2(200) := 'OPERATION_INVOKE';
   lv_dynamic_bl           VARCHAR2(200) := 'DYNAMIC_BLOCKING'; --Evalua una condición y si es positiva bloquea
   lv_description          VARCHAR2(200) := 'eSIM QR Code'; -- TEST QUICKWIN
-  lv_response_properties  VARCHAR2(32767 ) := '[
+  lv_response_properties  VARCHAR2(32767) := '[
         {
           "responseAlias":"FUNCTION_EXECUTION_STATUS",
           "subscriberPropertyId":"STATUS"
@@ -35,6 +35,7 @@ DECLARE
           "subscriberPropertyId":"SMDP_ADDRESS"
         }
       ]';
+      
 BEGIN
 
   SELECT Nvl(Max(B.behaviour_id),0) + 1

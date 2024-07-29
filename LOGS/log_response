@@ -1,0 +1,40 @@
+{
+  "invokeDataResponse": [
+    {
+      "invokeId": 3085,
+      "invokerName": "OPERATION_INVOKE",
+      "invokerOperStageId": "4068",
+      "success": false,
+      "elapsedTime": 11199,
+      "code": -31,
+      "message": "Invoke ID: 3085 Error Invoke 3085. ExternalResourceId. 14935, ExternalResourceComponenteId. 15655, Url http://200.95.160.7:8312/gsma/rsp2/es2plus/confirmOrder, Timeout. 11000, Error al llamar POST Rest: http://200.95.160.7:8312/gsma/rsp2/es2plus/confirmOrder java.net.SocketTimeoutException: Connect timed out",
+      "externalSubscriberProperties": [],
+      "request": "",
+      "response": "",
+      "ticket": "b220349c-418a-4b17-9657-360356008ff1",
+      "startingDate": "Jul 28, 2024, 5:38:19 PM",
+      "endingDate": "Jul 28, 2024, 5:38:30 PM",
+      "externalTransactionId": "bf9491b2-0573-4001-89fa-ad9923b16090",
+      "customerInvokeId": "b220349c-418a-4b17-9657-360356008ff1",
+      "retriesCount": 0,
+      "headers": [
+        {
+          "id": "Authorization",
+          "value": "WSSE Realm=\"AMXhub\", Profile=\"UsernameToken\""
+        },
+        {
+          "id": "X-WSSE",
+          "value": "UsernameToken Username=\"PA00003022\",PasswordDigest=\"Li2fKU8Ry2vM+hdYRV+8N+mTzfguSBH2EaVrzCQDU5A=\", Nonce=\"7EOuOyzCrxD3tpIAPgyNfQ16ab6\", Created=\"2022-10-03T15:46:29Z\""
+        },
+        {
+          "id": "X-RequestHeader",
+          "value": "request TransId=\"AP20009\", iccidManager=\"ValProdECU\", providerId=\"PA00003432\", AppId=\"AP20009\", AspCallBackUrl=http://181.209.207.33:19315, enterpriseId=\"esimtest\", country=\"ECU\""
+        },
+        {
+          "id": "X-Admin-Protocol",
+          "value": "gsma/rsp/v2.2.0"
+        }
+      ]
+    }
+  ]
+}

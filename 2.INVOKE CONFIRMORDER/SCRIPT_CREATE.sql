@@ -4,6 +4,7 @@ DECLARE
   ln_ext_res_group_id   NUMBER := 0;
   ln_ext_res_id         NUMBER := 0;
   lv_description        VARCHAR(255) := '[22385] ';
+  SP_COUNTER            NUMBER:=0;
   SP_MATCHING_ID        VARCHAR2(60) := 'MATCHING_ID';
   SP_FUNCTION_REQUESTER_IDENTIFIER        VARCHAR2(60) := 'FUNCTION_REQUESTER_IDENTIFIER';
   SP_FUNCTION_CALL_IDENTIFIER        VARCHAR2(60) := 'FUNCTION_CALL_IDENTIFIER';
@@ -23,7 +24,8 @@ BEGIN
   SELECT Min(S.external_resource_group_id) EXTERNAL_RESOURCE_GROUP_ID
   INTO   ln_ext_res_group_id
   FROM   external_resource_groups s
-  WHERE  Upper(s.description) LIKE Upper('%[22385]%');
+  WHERE  Upper(s.description) LIKE Upper('%[22385]%')
+  AND Upper(s.description) LIKE Upper('%ConfirmOrder%');
   
   --RESOURCE
   SELECT Nvl(Max(E.external_resource_id),0) + 1
@@ -928,72 +930,72 @@ BEGIN
   );
 
   --response evalutaion (ESTAN DESHABILITADOS)
-  -- INSERT INTO invoke_response_evaluation
-  -- (
-  --   invoke_response_evaluation_id,
-  --   invoke_id,
-  --   order_by,
-  --   xpath,
-  --   evaluation_type,
-  --   expected_value,
-  --   value_type,
-  --   evaluation_operator,
-  --   success,
-  --   failure_message,
-  --   status
-  -- )
-  -- VALUES
-  -- (
-  --   (
-  --     SELECT Nvl(Max(IR.invoke_response_evaluation_id),0) + 1
-  --     FROM   invoke_response_evaluation IR
-  --   ),
-  --   ln_invoke_id,
-  --   10,
-  --   '$.serviceException.messageId',
-  --   'FV',
-  --   null,
-  --   'VARCHAR',
-  --   '!=',
-  --   'NO',
-  --   'SEP=#ERRORMESSAGE#ERRORVARIABLES# Ocurrio un error en el API ConfirmOrder: %s (%s)',
-  --   'I' --Inhabilitado? Revisar
-  -- );
+  INSERT INTO invoke_response_evaluation
+  (
+    invoke_response_evaluation_id,
+    invoke_id,
+    order_by,
+    xpath,
+    evaluation_type,
+    expected_value,
+    value_type,
+    evaluation_operator,
+    success,
+    failure_message,
+    status
+  )
+  VALUES
+  (
+    (
+      SELECT Nvl(Max(IR.invoke_response_evaluation_id),0) + 1
+      FROM   invoke_response_evaluation IR
+    ),
+    ln_invoke_id,
+    10,
+    '$.serviceException.messageId',
+    'FV',
+    null,
+    'VARCHAR',
+    '!=',
+    'NO',
+    'SEP=#ERRORMESSAGE#ERRORVARIABLES# Ocurrio un error en el API ConfirmOrder: %s (%s)',
+    'I' --Inhabilitado? Revisar
+  );
 
-  -- INSERT INTO invoke_response_evaluation
-  -- (
-  --   invoke_response_evaluation_id,
-  --   invoke_id,
-  --   order_by,
-  --   xpath,
-  --   evaluation_type,
-  --   expected_value,
-  --   value_type,
-  --   evaluation_operator,
-  --   success,
-  --   failure_message,
-  --   status
-  -- )
-  -- VALUES
-  -- (
-  --   (
-  --     SELECT Nvl(Max(IR.invoke_response_evaluation_id),0) + 1
-  --     FROM   invoke_response_evaluation IR
-  --   ),
-  --   ln_invoke_id,
-  --   20,
-  --   '$.header.functionExecutionStatus.status',
-  --   'FV',
-  --   'Failed',
-  --   'VARCHAR',
-  --   '==',
-  --   'NO',
-  --   'SEP=#ERRORMESSAGE#ERRORVARIABLES# Ocurrio un error en el API ConfirmOrder: %s (%s)',
-  --   'I' --Inhabilitado? Revisar
-  -- );
+  INSERT INTO invoke_response_evaluation
+  (
+    invoke_response_evaluation_id,
+    invoke_id,
+    order_by,
+    xpath,
+    evaluation_type,
+    expected_value,
+    value_type,
+    evaluation_operator,
+    success,
+    failure_message,
+    status
+  )
+  VALUES
+  (
+    (
+      SELECT Nvl(Max(IR.invoke_response_evaluation_id),0) + 1
+      FROM   invoke_response_evaluation IR
+    ),
+    ln_invoke_id,
+    20,
+    '$.header.functionExecutionStatus.status',
+    'FV',
+    'Failed',
+    'VARCHAR',
+    '==',
+    'NO',
+    'SEP=#ERRORMESSAGE#ERRORVARIABLES# Ocurrio un error en el API ConfirmOrder: %s (%s)',
+    'I' --Inhabilitado? Revisar
+  );
   
   dbms_output.Put_line('INVOKE ID: '|| ln_invoke_id );
-  dbms_output.Put_line('---------------REFRESH---------------------------------- ----');
+  dbms_output.Put_line('---------------REFRESH--------------------------------------');
   dbms_output.put_line('http://192.168.37.146:8101/quickWin/refreshInvokeById/'||ln_invoke_id);
   dbms_output.Put_line('---------------GUARDE ESTE SCRIPT POR MAYOR SEGURIDAD-------------------------------------');
   dbms_output.Put_line('---------------SELECT--------------------------------------');
@@ -1025,13 +1027,13 @@ BEGIN
   dbms_output.Put_line('http://192.168.37.146:8101/quickWin/executeInvoke');
   dbms_output.Put_line('---------------POST REST--------------------------------- -----');
   dbms_output.Put_line('{
-       "invokeId": "'||ln_invoke_id||'", 
-       "invokerName": "Prueba Invoke", 
-       "cacheOptions":"0", 
-       "sync":"YES", 
-       "customerInvokerId":"id12345", 
-       "sessionData": { 
-              "externalSubscriberProperties": [');
+  "invokeId": "'||ln_invoke_id||'", 
+  "invokerName": "Prueba Invoke", 
+  "cacheOptions":"0", 
+  "sync":"YES", 
+  "customerInvokerId":"id12345", 
+  "sessionData": { 
+    "externalSubscriberProperties": [');
   FOR subs IN
   (
          SELECT T.subscriber_property_id

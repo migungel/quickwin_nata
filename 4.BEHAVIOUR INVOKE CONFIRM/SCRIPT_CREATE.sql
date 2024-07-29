@@ -1,12 +1,11 @@
-declare
-ln_invoke_id_queryaccount   NUMBER := 2747;
-ln_beh_oper_invoke_id       NUMBER;
-ln_behaviour_oper_id        NUMBER := 815;
-ln_behaviour_oper_stage_id  NUMBER := 3610;
-ln_campaign_id              NUMBER := 100096;
--- ln_condition_id             number := 3435;
+DECLARE
+  ln_invoke_id  NUMBER := 3085;
+  ln_beh_oper_invoke_id       NUMBER;
+  ln_behaviour_oper_id        NUMBER := 865;
+  ln_behaviour_oper_stage_id  NUMBER := 4068;
+  ln_campaign_id              NUMBER := 100129;
 --
-begin
+BEGIN
 -- BEHAVIOUR_OPER_INVOKE --
   SELECT Nvl(Max(BI.behaviour_oper_invoke_id),0) + 1
   INTO   ln_beh_oper_invoke_id
@@ -37,20 +36,19 @@ begin
     looping_operation_id,
     copy_from_subs_to_subs
   )
-  values 
+  VALUES 
   (
     ln_beh_oper_invoke_id,
     ln_behaviour_oper_stage_id,
-    'PRE',
+    'POST',
     null,
-    ln_invoke_id_queryaccount,
-    (SELECT NVL(MAX(T.Order_By),0) + 10 FROM behaviour_oper_invoke T
-    where t.behaviour_oper_stage_id = ln_behaviour_oper_stage_id),
+    ln_invoke_id,
+    10,
     'YES',
     'A',
     'YES',
     null,
-    '',
+    '[]',
     null,
     null,
     '',
@@ -81,4 +79,3 @@ exception when others then
 rollback;
 dbms_output.put_line(sqlerrm);
 end;
-

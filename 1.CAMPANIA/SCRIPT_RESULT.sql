@@ -81,31 +81,31 @@ http://192.168.37.146:8101/quickWin/getActivateRequest
         "externalSubscriberProperties": [
           {
             "id": "ICCID",
-            "value": [""]
+            "value": ["89354010111104000222"]
           },
           {
             "id": "EID",
-            "value": [""]
+            "value": ["00636856000000000000000000000777"]
           },
           {
             "id": "MATCHING_ID",
-            "value": [""]
+            "value": ["1234-5678-9ABC"]
           },
           {
             "id": "CONFIRMATION_CODE",
-            "value": [""]
+            "value": ["1234"]
           },
           {
             "id": "SMDS_ADDRESS",
-            "value": [""]
+            "value": ["smds.gsma.com"]
           },
           {
             "id": "RELEASE_FLAG",
-            "value": [""]
+            "value": ["true"]
           },
           {
             "id": "DISPLAY_PROFILE_NAME",
-            "value": [""]
+            "value": ["new personal optional description"]
           }
         ]
       }

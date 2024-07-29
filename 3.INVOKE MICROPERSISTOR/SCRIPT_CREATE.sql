@@ -4,6 +4,7 @@ DECLARE
   ln_ext_res_group_id   NUMBER := 0;
   ln_ext_res_id         NUMBER := 0;
   lv_description        VARCHAR(255) := '[22385] ';
+  SP_COUNTER            NUMBER:=0;
   SP_INFORMATION_SERVICE   VARCHAR2(60) := 'INFORMATION_SERVICE';
   SP_SMDP_ADDRESS       VARCHAR2(60) := 'SMDP_ADDRESS';
   SP_MATCHING_ID        VARCHAR2(60) := 'MATCHING_ID';
@@ -18,7 +19,8 @@ BEGIN
   SELECT Min(S.external_resource_group_id) EXTERNAL_RESOURCE_GROUP_ID
   INTO   ln_ext_res_group_id
   FROM   external_resource_groups s
-  WHERE  Upper(s.description) LIKE Upper('%[22385]%');
+  WHERE  Upper(s.description) LIKE Upper('%[22385]%')
+  AND    Upper(s.description) LIKE Upper('%Grupo para Esim:updateEstadoPorICCID%');
   
   --RESOURCE
   SELECT Nvl(Max(E.external_resource_id),0) + 1
@@ -578,13 +580,13 @@ BEGIN
   dbms_output.Put_line('http://192.168.37.146:8101/quickWin/executeInvoke');
   dbms_output.Put_line('---------------POST REST--------------------------------- -----');
   dbms_output.Put_line('{
-       "invokeId": "'||ln_invoke_id||'", 
-       "invokerName": "Prueba Invoke", 
-       "cacheOptions":"0", 
-       "sync":"YES", 
-       "customerInvokerId":"id12345", 
-       "sessionData": { 
-              "externalSubscriberProperties": [');
+  "invokeId": "'||ln_invoke_id||'", 
+  "invokerName": "Prueba Invoke", 
+  "cacheOptions":"0", 
+  "sync":"YES", 
+  "customerInvokerId":"id12345", 
+  "sessionData": { 
+    "externalSubscriberProperties": [');
   FOR subs IN
   (
          SELECT T.subscriber_property_id
