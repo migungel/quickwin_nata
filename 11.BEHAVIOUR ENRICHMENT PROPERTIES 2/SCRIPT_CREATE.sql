@@ -1,21 +1,11 @@
 DECLARE
-ln_condition_id number := null;
+ln_condition_id number := 3793;
 ln_function_call_id number := null;
 ln_behaviour_oper_id number := 865;
 ln_behaviour_oper_stage_id number := 4068;
 ln_campaign_id              NUMBER := 100129;
 lv_data VARCHAR2(32767) := '[
-  {
-    "id":"INFORMATION_SERVICE",
-    "value":[
-      "ESIM:ConsultaICCIDCompleto"    
-    ]
-  },{
-    "id":"ESTADO",
-    "value":[
-      "R"    
-    ]
-  },{
+ {
     "id":"STATUS",
     "value":[
       "FAILED"    
@@ -45,10 +35,10 @@ BEGIN
     ),
     ln_behaviour_oper_stage_id, 
     ln_condition_id,
-    'PRE',
-    10,
+    'POST',
+    20,
     lv_data,
-    'A',
+    'I', --INHABILITADO?
     '', 
     ln_function_call_id, 
     'CONDITION'

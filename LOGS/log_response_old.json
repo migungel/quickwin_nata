@@ -1,0 +1,31 @@
+{
+  "invokeDataResponse": [
+    {
+      "invokeId": 2475,
+      "invokerName": "ENRICHMENT_PRE_OPERATION_INVOKE",
+      "invokerOperStageId": "3196",
+      "success": false,
+      "elapsedTime": 418,
+      "code": 10,
+      "message": "No se encontro el ICCID registrado en repositorio eSIM",
+      "externalSubscriberProperties": [
+        { "id": "ICCID", "value": [""] },
+        { "id": "CODE", "value": ["0"] },
+        { "id": "MENSAJE", "value": ["Successful Response"] },
+        { "id": "ESTADO", "value": [""] }
+      ],
+      "request": "\n{\n\n  \"informationService\": \"ESIM:ConsultaICCIDCompleto\",\n  \"inputs\": [\n    {\n      \"key\": \"ICCID\",\n      \"value\": \"89354010111104000222\"\n    },{\n      \"key\": \"ESTADO\",\n      \"value\": \"R\"\n    }\n  ]\n\n}\n",
+      "response": "{\"code\":0,\"status\":\"OK\",\"message\":\"Successful Response\",\"response\":[],\"internalCorrelationId\":\"eb1b63f2-3baf-4eb6-9b24-dab1a547514c\"}",
+      "responseHeader": "{\"date\":[\"Mon, 29 Jul 2024 00:59:48 GMT\"],\"server_name\":[\"dc-micro-jeis-silver-2-6d7bw\"],\"transfer-encoding\":[\"chunked\"],\"statusInfo\":[\"OK\"],\"vary\":[\"Access-Control-Request-Headers\",\"Access-Control-Request-Method\",\"Origin\"],\"x-internal-trx-id\":[\"eb1b63f2-3baf-4eb6-9b24-dab1a547514c\"],\"content-type\":[\"application/json;charset\\u003dUTF-8\"],\"ip_server\":[\"10.237.4.14\"],\"x-client-name\":[\"null\"],\"status\":[\"200\"]}",
+      "ticket": "4c328270-588e-47b0-aa63-9f530f8f68fa",
+      "startingDate": "Jul 28, 2024, 7:59:48 PM",
+      "endingDate": "Jul 28, 2024, 7:59:48 PM",
+      "externalTransactionId": "bf9491b2-0573-4001-89fa-ad9923b16090",
+      "customerInvokeId": "4c328270-588e-47b0-aa63-9f530f8f68fa",
+      "retriesCount": 0,
+      "endpointUrl": "http://micro-jeis-silver.router-default.apps.aro-dev.conecel.com/microjeis/resources/ws/eipConsumeServicioMicroEis",
+      "httpMethod": "POST",
+      "headers": []
+    }
+  ]
+}
