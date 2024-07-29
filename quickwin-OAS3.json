@@ -1,0 +1,5320 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Quickwin",
+    "description": "Quickwin Spring Boot Swagger Example API",
+    "termsOfService": "https://www.claro.com.ec/terms",
+    "contact": {
+      "name": "TIC Manuel Garcia",
+      "url": "https://www.claro.com.ec",
+      "email": "manuel.garcia@claro.com.ec"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://choosealicense.com/licenses/mit/"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8101",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Cache Management",
+      "description": "These endpoints provide mechanisms for cache management."
+    },
+    {
+      "name": "Actuator",
+      "description": "Monitor and interact",
+      "externalDocs": {
+        "description": "Spring Boot Actuator Web API Documentation",
+        "url": "https://docs.spring.io/spring-boot/docs/current/actuator-api/html/"
+      }
+    }
+  ],
+  "paths": {
+    "/quickWin/reprocessProductProvisioning": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeReprocessing",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "9aaaceb5-79a7-4947-8bb6-5d8c32f2789c"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProvisioningReprocessingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "24dfd4f8-dbf1-459a-ba78-23ef3456140a"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "b2463c9a-96b0-4422-bcf9-a318c1c8d717"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReprocessingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/reprocessActivate": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeActivateReprocessing",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "210c24b4-c759-4959-aa52-caf7fcb76263"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivateReprocessingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "3759fc37-ea0f-4782-aa46-130f3f77b1d8"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "e14bd467-d961-4009-bbb0-4c095a98a16a"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReprocessingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/getActivateRequest": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "getActivateRequest",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "556a117b-87e6-4b17-b4d2-e0879dad82c0"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "631c7b29-ffba-42ef-94d9-be058185b4d3"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "497daf3c-9b34-4442-a6ed-28e8b6e47a05"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/executeInvoke": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeInvoke",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "b8577a11-f916-46cd-ab15-9ab3f62dec76"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvokeDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "97ef2191-3a6b-4261-a7b9-893dbe1a826a"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "6085654e-4563-4974-9638-02b50cf5ec75"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvokeDataResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/executeDynamycFunctions": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeDynamycFunction",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "442fbe05-9841-4a7b-8e53-ab48151c9651"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DynamycFunctionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "0be422de-ebbf-4f4e-9ecb-c4ff3ab50d28"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "ee73d9f4-9042-436b-bf2b-b95e2fc89b13"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamycFunctionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/executeDefinedFunctions": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeDefinedFunction",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "fdfaaf5c-d020-4102-9a52-01a243e9971e"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DefinedFunctionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "987dac8c-8488-491b-940f-6f608574e9b3"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "b8789131-6b88-4cb5-9249-863d1feaedd2"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DefinedFunctionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/executeCondition": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeCondition",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "984dec96-acd3-422b-a5f6-1f41811bfc68"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConditionDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "bc6068b0-38f2-4750-83fb-4e3d63c05bc6"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "c315848b-da3f-486c-9fef-30d08bd04ff5"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConditionStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/executeConditionGroup": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "executeConditionGroup",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "694a79d4-7538-49c3-9a69-e4b647bc1088"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConditionGroupDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "6a1ca8a6-cda8-4790-a182-05a3b3f4cf16"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "3e0aabcc-821e-4c0e-a80e-eb5274e459af"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConditionGroupStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/checkSchedule": {
+      "post": {
+        "tags": ["Quickwin Operation"],
+        "operationId": "checkSchedule",
+        "parameters": [
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "3438b807-7197-4736-83d6-2addc723e688"
+          },
+          {
+            "name": "x-client-name",
+            "in": "header",
+            "description": "Nombre del cliente APP",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-app"
+          },
+          {
+            "name": "x-user-name",
+            "in": "header",
+            "description": "Nombre del usuario",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "test-user"
+          },
+          {
+            "name": "x-request-operation-id",
+            "in": "header",
+            "description": "Request operation ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": ""
+          },
+          {
+            "name": "x-channel-id",
+            "in": "header",
+            "description": "ID del canal",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "my-channel"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuickwinScheduleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "cc59c8c1-be6e-408e-8fba-8e61ab0abeab"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "569f2618-d3e8-464c-83cd-f94045648186"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuickwinScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/healthcheck": {
+      "get": {
+        "tags": ["Actuator"],
+        "summary": "Actuator web endpoint 'health'",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.spring-boot.actuator.v3+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/vnd.spring-boot.actuator.v2+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/healthcheck/**": {
+      "get": {
+        "tags": ["Actuator"],
+        "summary": "Actuator web endpoint 'health-path'",
+        "operationId": "health-path",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.spring-boot.actuator.v3+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/vnd.spring-boot.actuator.v2+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findScheduleById/{scheduleId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Schedule By Id",
+        "operationId": "findScheduleById",
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "06520f8c-96a0-4571-985d-ac3e4bd33a5b"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "9161ad10-493a-452d-9569-5b97294a656e"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "12733975-c13e-4a5a-aadc-b7536ad024fe"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSScheduleData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findInvokeById/{invokeId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Invoke By Id",
+        "operationId": "findInvokeById",
+        "parameters": [
+          {
+            "name": "invokeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "e2a8a783-a6b8-46a3-983c-96c030af8b46"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "67d62a3f-7221-45a4-a8f8-f07bc496cf57"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "a41ac596-b492-45e7-adba-b8f7f514d54d"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSInvokeData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findDynamicFunctionDataByFunctionId/{functionId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Dynamic Function Data By FunctionId",
+        "operationId": "findDynamicFunctionDataByFunctionId",
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "5ca596cd-3e23-45cd-ad45-3481ec89adb4"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "b296aef4-7a11-4a76-a976-686b25c0f455"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "412ae337-e0a6-4d5b-9c51-cad63be7dee4"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSDynamycFunctionCallData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findDefinedFunctionCallById/{definedFunctionCallId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Defined Function Call By Id",
+        "operationId": "findDefinedFunctionCallById",
+        "parameters": [
+          {
+            "name": "definedFunctionCallId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "d1c9aaa3-db42-4a92-b8fa-03bd9fddc461"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "cc266d1b-0030-413e-96f1-2bf1cbe5cce1"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "a7e34202-6d39-4101-9587-9374224d4c1a"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSDefinedFunctionCallData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findConditionGroupById/{conditionGroupId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Condition Group By Id",
+        "operationId": "findConditionGroupById",
+        "parameters": [
+          {
+            "name": "conditionGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "5a442a00-e14b-4c2e-91e3-90a1ea31926e"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "0ee28b69-d5ac-4919-bee6-7465df2bde60"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "dc2a55b2-c0cb-4884-a21b-a68f204ec00e"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSConditionGroupData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findConditionById/{conditionId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Condition By Id",
+        "operationId": "findConditionById",
+        "parameters": [
+          {
+            "name": "conditionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "6367ef7c-b927-492e-ab44-2b3556603540"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "162be53d-76c0-4f8d-bdb3-32f636acaa7e"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "8805c183-fdc5-49c7-9ee0-5c4c704416c0"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSConditionData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findCampaignById/{campaignId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Campaign By Id",
+        "operationId": "findCampaignById",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "428973f9-9429-42b5-b097-201cd8603ac0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "0fd017d3-ec02-4b0d-94fd-6778ffde2e63"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "69e7d6bf-a010-41b1-ad0f-fa4eaf01b9b4"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/findBehaviourLoggingCallByCampaignId/{campaignId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Find Behaviour Logging Call By CampaignId",
+        "operationId": "findBehaviourLoggingCallByCampaignId",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enCache",
+            "in": "query",
+            "description": "Permite elegir si consultamos solo dentro de la cache interna del componente\no si la consulta va a base de datos y la cachea\n<ul>\n<li><strong>true</strong>: (default) va solo a la cache interna.</li>\n<li><strong>false</strong>: consulta en base de datos la primera ves y cachea la información.</li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "cb6c9450-27c6-4d69-a38c-0178c13249e0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "17e353e0-e226-4271-8be3-b7eadf97f185"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "504635c7-dc87-4836-bac4-eac59082222d"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MDSLoggingData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearScheduleById/{scheduleId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Schedule By Id",
+        "operationId": "clearScheduleById",
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "9c82a673-3fb7-48a3-b418-0117944dde33"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "bbf0fb0c-816a-4daf-97bf-ac139edfb19d"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "ccc4e34e-30fd-44e4-b106-9459ceeb2e4d"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearInvokeById/{invokeId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Invoke By Id",
+        "operationId": "clearInvokeById",
+        "parameters": [
+          {
+            "name": "invokeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "3d44c0f2-613e-4037-823d-3bdd7109da7d"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "015219a5-f874-46a8-b0a7-bff30ea5d46e"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "efd4605a-10a6-4aff-9946-34a7b31bbf59"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearDynamycFunctionById/{dynamycFunctionId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Dynamyc Function By Id",
+        "operationId": "clearDynamycFunctionById",
+        "parameters": [
+          {
+            "name": "dynamycFunctionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "294905ad-e133-4b75-904f-907566802ac5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "cdfe12f3-6000-40ef-9c61-1b4f231db712"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "260e1459-9ac3-4e51-b24c-1cbed68411e3"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearDefinedFunctionCallById/{definedFunctionCallId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Defined Function Call By Id",
+        "operationId": "clearDefinedFunctionCallById",
+        "parameters": [
+          {
+            "name": "definedFunctionCallId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "42b13ff2-2598-45c7-98eb-081916d355dc"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "48a4f1c5-90bc-4a4a-8d24-eb7da787614e"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "0360989d-5c1e-4896-b3dc-5a1c8b56d28e"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearConditionGroupById/{conditionGroupId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Condition Group By Id",
+        "operationId": "clearConditionGroupById",
+        "parameters": [
+          {
+            "name": "conditionGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "3881f6c1-737d-47bd-873a-2ac4fb33b6f3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "6355a4b0-fe4f-45e4-965b-3e16e93d017c"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "ec98d638-4050-4e9a-a88e-08b1fc3a3c83"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearConditionById/{conditionId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Condition By Id",
+        "operationId": "clearConditionById",
+        "parameters": [
+          {
+            "name": "conditionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "1c0f0a36-a7e9-412b-b5bc-a009398df9cd"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "e7b6c339-4fcd-4d9a-a373-448b5ff7cd3a"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "cb8c75d2-1b72-468d-933f-3e43a5320b89"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearCampaignById/{campaignId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Cache By Campaign",
+        "operationId": "clearCacheByCampaign",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "4b65cfb9-731d-419f-954b-ebc764e5938e"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "904c5b87-420c-4b4f-8fde-1bc66d5f839a"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "b70048bd-1285-40a9-8893-45e3fce752bd"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/clearBehaviourLoggingCallByCampaignId/{campaignId}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Behaviour Logging Call By Campaign Id",
+        "operationId": "clearBehaviourLoggingCallByCampaignId",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "5b05e4a3-b524-4439-9ccb-eb1be9333806"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "7ba20df6-80d3-43db-96a2-ec4b36acf075"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "752df328-314e-4c11-bc01-8e87aa3ef3c1"
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMDSData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/cacheValue": {
+      "get": {
+        "tags": ["Cache Management", "Cache Resource"],
+        "summary": "Get cache value",
+        "description": "Esta es una operación para <strong>troubleshooting</strong> y para su uso es necesario tener conocimiento de la implementación de cache",
+        "operationId": "getCacheValue",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Hace referencia al repositorio de cache que desea ser consultado",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BEHAVIOUR_BLOCKINGS",
+                "BEHAVIOUR_ENRICHMENT_PROPERTY",
+                "BEHAVIOUR_ENRICHMENT",
+                "BEHAVIOUR_EXCLUSIONS_FROM_OFFER",
+                "BEHAVIOUR_EXCLUSIONS_FROM_OFFER_TYPE",
+                "BEHAVIOUR_EXCLUSIONS_FROM_PRODUCT",
+                "BEHAVIOUR_EXCLUSIONS_FROM_PRODUCT_TYPE",
+                "BEHAVIOUR_LOGGING",
+                "BEHAVIOUR_NOTIFICATION",
+                "BEHAVIOUR_OFFER_ADDONS",
+                "BEHAVIOUR_OPERATION",
+                "BEHAVIOUR_OPER_INVOKE",
+                "BEHAVIOUR_OPER_STAGES",
+                "BEHAVIOUR_PRICE",
+                "BEHAVIOUR_PRODUCT",
+                "BEHAVIOUR_VALIDATIONS",
+                "CAMPAIGN_OFFERS",
+                "CAMPAIGN",
+                "CONDITION_GROUP_ELEMENT",
+                "CONDITION_GROUP",
+                "CONDITION_PROPERTIES",
+                "CONDITION",
+                "DEFINED_FUNCTION_BINDINGS",
+                "DEFINED_FUNCTION_CALL",
+                "DEFINED_FUNCTION_PARAMS",
+                "DOMAIN_ELEMENTS_1",
+                "DOMAIN_ELEMENTS_2",
+                "DOMAIN_ELEMENTS_3",
+                "DOMAIN_VALUE_RANGES",
+                "EXTERNAL_RESOURCE_COMPONENTS",
+                "FUNCTIONS",
+                "INVOKE_MAPPING",
+                "INVOKE_RESPONSE_EVALUATION",
+                "INVOKE",
+                "NOTIFICATION_GROUP",
+                "NOTIFICATIONS",
+                "OFFER_GROUP_ELEMENTS",
+                "OFFER_PRODUCTS_BY_OFFER",
+                "OFFER_PRODUCTS_BY_BOTH",
+                "OFFER_PRODUCTS_COMPUTED",
+                "OFFER_RECURENCY_CALENDAR",
+                "OFFERS",
+                "OFFERS_2",
+                "OFFERS_EXTERNAL",
+                "OPERATION_HISTORY",
+                "PRODUCTS",
+                "PRODUCTS_PRODUCT_TYPE",
+                "PRODUCTS_EXTERNAL",
+                "PRODUCT_TYPE_PROVISIONING",
+                "SCHEDULE_DETAIL",
+                "SCHEDULE"
+              ]
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Hace referencia al identificador con el que se guardo la cache y a traves del cual puede se consultado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "4965e041-a2f4-48cb-ae8a-bab7e170d2d5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "1d4834ee-0608-4071-be48-9d5a0ed8c451"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "ab669aef-0e33-4dd8-9c0c-5875354ed56b"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/cacheManagement/clear": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear all cache",
+        "operationId": "clearCache",
+        "parameters": [
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "9f18d855-65a1-45ef-a486-34203bc8b846"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "ea4692f8-dc31-4a1b-af2a-fa0a6fd5089b"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "867c18fd-7d74-4d1f-8c66-7780edb5db3b"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearCacheResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quickWin/cacheManagement/clear/{domain}": {
+      "get": {
+        "tags": ["Cache Management", "Cache Cleaners"],
+        "summary": "Clear Cache By Domain",
+        "operationId": "clearCacheByDomain",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddresses",
+            "in": "query",
+            "description": "Permite agrega una lista de direcciones <strong>IP</strong> separadas por commas <strong>\",\"</strong>\ncon la finalidad de que la ejecución ocurra sobre los contendores/servidores que posean dichas ips específicamente.<br/><br/>\n<strong>Ejemplo:</strong> <i>\"10.0.3.2,10.0.3.3,10.0.3.4,10.0.3.6\"</i> <br/><br/>\n<ul>\n<li>Si envía <strong>vacío</strong>, se propagara la ejecución hacia todas la replicas de forma asíncrona</li>\n<li>Si envía <strong>localhost</strong> la ejecución ocurrirá sobre el backend que atienda la petición </li>\n</ul>\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-external-trx-id",
+            "in": "header",
+            "description": "ID de transacción externa",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "8c454a29-3db5-45bf-9e11-777ce92202a7"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-external-trx-id": {
+                "description": "ID externo de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "b8de856a-6123-4495-add5-e2aa13ae74fb"
+              },
+              "x-internal-trx-id": {
+                "description": "ID interno de transacción",
+                "schema": {
+                  "type": "string"
+                },
+                "example": "d899b0c1-4443-41fe-9c45-578d24faa8a5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearCacheResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "tags": ["Actuator"],
+        "summary": "Actuator web endpoint 'metrics'",
+        "operationId": "metrics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.spring-boot.actuator.v3+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/vnd.spring-boot.actuator.v2+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/{requiredMetricName}": {
+      "get": {
+        "tags": ["Actuator"],
+        "summary": "Actuator web endpoint 'metrics-requiredMetricName'",
+        "operationId": "metrics-requiredMetricName",
+        "parameters": [
+          {
+            "name": "requiredMetricName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.spring-boot.actuator.v3+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/vnd.spring-boot.actuator.v2+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "tags": ["Actuator"],
+        "summary": "Actuator web endpoint 'info'",
+        "operationId": "info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.spring-boot.actuator.v3+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/vnd.spring-boot.actuator.v2+json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProvisioningReprocessingRequest": {
+        "type": "object",
+        "properties": {
+          "reprocessBy": {
+            "type": "string",
+            "enum": ["date", "transactionId", "all"]
+          },
+          "reprocessSearchInfo": {
+            "$ref": "#/components/schemas/ReprocessSearchInfo"
+          }
+        }
+      },
+      "ReprocessSearchInfo": {
+        "type": "object",
+        "properties": {
+          "invokeId": {
+            "type": "number"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ReprocessingResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "reprocessLotId": {
+            "type": "string"
+          },
+          "transactionsReprocessed": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ActivateReprocessSearchInfo": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "number"
+          },
+          "operationName": {
+            "type": "string"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ActivateReprocessingRequest": {
+        "type": "object",
+        "properties": {
+          "reprocessBy": {
+            "type": "string",
+            "enum": ["date", "ticket", "all"]
+          },
+          "reprocessSearchInfo": {
+            "$ref": "#/components/schemas/ActivateReprocessSearchInfo"
+          }
+        }
+      },
+      "ActivateRequest": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/components/schemas/Body"
+          },
+          "commonHeaderRequest": {
+            "$ref": "#/components/schemas/CommonHeaderRequest"
+          }
+        },
+        "xml": {
+          "name": "activateRequest",
+          "namespace": "http://message.core.app.claro.conecel.com/quickwin"
+        }
+      },
+      "ActivationInfo": {
+        "type": "object",
+        "properties": {
+          "expectedExecutionDate": {
+            "type": "string"
+          },
+          "offerId": {
+            "type": "string"
+          },
+          "externalOfferId": {
+            "type": "string"
+          },
+          "offerDetail": {
+            "type": "string"
+          },
+          "remarks": {
+            "type": "string"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/Subscription"
+          },
+          "paymentInfo": {
+            "$ref": "#/components/schemas/PaymentInfo"
+          },
+          "campaignId": {
+            "type": "string"
+          },
+          "productInfo": {
+            "$ref": "#/components/schemas/ProductInfo"
+          },
+          "period": {
+            "type": "string"
+          },
+          "periodQuantity": {
+            "type": "string"
+          },
+          "targetSubscription": {
+            "$ref": "#/components/schemas/TargetSubscription"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          },
+          "dynamicSessionData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DynamicSessionData"
+            }
+          }
+        }
+      },
+      "Body": {
+        "type": "object",
+        "properties": {
+          "activationInfo": {
+            "$ref": "#/components/schemas/ActivationInfo"
+          }
+        }
+      },
+      "ChannelInfo": {
+        "type": "object",
+        "properties": {
+          "mediaId": {
+            "type": "string"
+          },
+          "mediaDetailId": {
+            "type": "string"
+          },
+          "channelId": {
+            "type": "string"
+          }
+        }
+      },
+      "CommonHeaderRequest": {
+        "type": "object",
+        "properties": {
+          "geolocationInfo": {
+            "$ref": "#/components/schemas/GeolocationInfo"
+          },
+          "consumerInfo": {
+            "$ref": "#/components/schemas/ConsumerInfo"
+          },
+          "channelInfo": {
+            "$ref": "#/components/schemas/ChannelInfo"
+          },
+          "operationInfo": {
+            "$ref": "#/components/schemas/OperationInfo"
+          },
+          "securityInfo": {
+            "$ref": "#/components/schemas/SecurityInfo"
+          }
+        }
+      },
+      "ConsumerInfo": {
+        "type": "object",
+        "properties": {
+          "consumerType": {
+            "type": "string"
+          },
+          "terminal": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string"
+          },
+          "consumerId": {
+            "type": "string"
+          }
+        }
+      },
+      "Currency": {
+        "type": "object",
+        "properties": {
+          "currencyId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "DynamicSessionData": {
+        "type": "object",
+        "properties": {
+          "orderBy": {
+            "type": "string"
+          },
+          "idPrefix": {
+            "type": "string"
+          },
+          "idSuffixAI": {
+            "type": "string"
+          },
+          "allValuesPropertyId": {
+            "type": "string"
+          },
+          "allValuesPropertyIdSuffixAI": {
+            "type": "string"
+          },
+          "allValuesGroupPropertyId": {
+            "type": "string"
+          },
+          "sessionDataPropertyId": {
+            "type": "string"
+          },
+          "sessionDataPropertyIdSuffixAI": {
+            "type": "string"
+          },
+          "sessionDataGroupPropertyId": {
+            "type": "string"
+          },
+          "externalSubscriberProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalSubscriberProperties"
+            }
+          }
+        }
+      },
+      "ExternalSubscriberProperties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "GeolocationInfo": {
+        "type": "object",
+        "properties": {
+          "locality": {
+            "$ref": "#/components/schemas/Locality"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "country": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "accuracy": {
+            "type": "string"
+          }
+        }
+      },
+      "Locality": {
+        "type": "object",
+        "properties": {
+          "localityId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          }
+        }
+      },
+      "OperationInfo": {
+        "type": "object",
+        "properties": {
+          "externalTransactionId": {
+            "type": "string"
+          },
+          "externalOperation": {
+            "type": "string"
+          },
+          "externalTransactionDate": {
+            "type": "string"
+          },
+          "operationId": {
+            "type": "string"
+          },
+          "processingMethod": {
+            "type": "string"
+          },
+          "compensationTransactionId": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentInfo": {
+        "type": "object",
+        "properties": {
+          "paymentMethod": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "paymentDate": {
+            "type": "string"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          }
+        }
+      },
+      "PaymentMethod": {
+        "type": "object",
+        "properties": {
+          "paymentAmount": {
+            "type": "string"
+          },
+          "paymentMethodId": {
+            "type": "string"
+          },
+          "paymentMethodType": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductInfo": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "productOfferingPrice": {
+            "$ref": "#/components/schemas/ProductOfferingPrice"
+          }
+        }
+      },
+      "ProductOfferingPrice": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "productAmount": {
+            "type": "string"
+          }
+        }
+      },
+      "SecurityInfo": {
+        "type": "object",
+        "properties": {
+          "authorizationId": {
+            "type": "string"
+          }
+        }
+      },
+      "SessionData": {
+        "type": "object",
+        "properties": {
+          "externalSubscriberProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalSubscriberProperties"
+            }
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "paymentPlan": {
+            "type": "string"
+          }
+        }
+      },
+      "TargetSubscription": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "ActivateMessageResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          }
+        }
+      },
+      "ActivateResponse": {
+        "type": "object",
+        "properties": {
+          "activateMessageResponse": {
+            "$ref": "#/components/schemas/ActivateMessageResponse"
+          },
+          "commonHeaderResponse": {
+            "$ref": "#/components/schemas/CommonHeaderResponse"
+          },
+          "userMessageResponse": {
+            "$ref": "#/components/schemas/UserMessageResponse"
+          }
+        },
+        "xml": {
+          "name": "activateResponse",
+          "namespace": "http://message.core.app.claro.conecel.com/quickwin"
+        }
+      },
+      "CommonHeaderResponse": {
+        "type": "object",
+        "properties": {
+          "operationInfo": {
+            "$ref": "#/components/schemas/OperationInfoResponse"
+          }
+        }
+      },
+      "OperationInfoResponse": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "type": "string"
+          },
+          "operationId": {
+            "type": "string"
+          }
+        }
+      },
+      "UserMessageResponse": {
+        "type": "object",
+        "properties": {
+          "block": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "InvokeDataRequest": {
+        "type": "object",
+        "properties": {
+          "invokeId": {
+            "type": "number"
+          },
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          },
+          "externalTransactionId": {
+            "type": "string"
+          },
+          "invokerName": {
+            "type": "string"
+          },
+          "invokerOperStageId": {
+            "type": "string"
+          },
+          "cacheOptions": {
+            "type": "string"
+          },
+          "sync": {
+            "type": "string"
+          },
+          "customerInvokerId": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "invokeDataRequest",
+          "namespace": "http://inv.qkw.claro.conecel.com/service"
+        }
+      },
+      "InvokeDataResponse": {
+        "type": "object",
+        "properties": {
+          "invokeId": {
+            "type": "number"
+          },
+          "invokerName": {
+            "type": "string"
+          },
+          "invokerOperStageId": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "elapsedTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "externalSubscriberProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalSubscriberProperties"
+            }
+          },
+          "request": {
+            "type": "string"
+          },
+          "response": {
+            "type": "string"
+          },
+          "responseHeader": {
+            "type": "string"
+          },
+          "ticket": {
+            "type": "string"
+          },
+          "startingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalTransactionId": {
+            "type": "string"
+          },
+          "customerInvokeId": {
+            "type": "string"
+          },
+          "retriesCount": {
+            "type": "number"
+          },
+          "endpointUrl": {
+            "type": "string"
+          },
+          "httpMethod": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagValue"
+            }
+          }
+        },
+        "xml": {
+          "name": "invokeDataResponse",
+          "namespace": "http://inv.qkw.claro.conecel.com/service"
+        }
+      },
+      "TagValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "DynamycFunctionRequest": {
+        "type": "object",
+        "properties": {
+          "idFunction": {
+            "type": "number"
+          },
+          "input": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DynamycFunctionResponse": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "writeOnly": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DefinedFunctionRequest": {
+        "type": "object",
+        "properties": {
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          },
+          "definedFunctionCallId": {
+            "type": "number"
+          }
+        }
+      },
+      "DefinedFunctionResponse": {
+        "type": "object",
+        "properties": {
+          "functionResult": {
+            "$ref": "#/components/schemas/ExternalSubscriberProperties"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ConditionDataRequest": {
+        "type": "object",
+        "properties": {
+          "conditionId": {
+            "type": "number"
+          },
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          },
+          "invokerName": {
+            "type": "string"
+          },
+          "invokerOperStageId": {
+            "type": "string"
+          },
+          "cacheOptions": {
+            "type": "string"
+          }
+        }
+      },
+      "ConditionStatus": {
+        "type": "object",
+        "properties": {
+          "met": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ConditionGroupDataRequest": {
+        "type": "object",
+        "properties": {
+          "conditionGroupId": {
+            "type": "number"
+          },
+          "invokerName": {
+            "type": "string"
+          },
+          "invokerOperStageId": {
+            "type": "string"
+          },
+          "cacheOptions": {
+            "type": "string"
+          },
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          }
+        }
+      },
+      "ConditionGroupStatus": {
+        "type": "object",
+        "properties": {
+          "met": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "QuickwinScheduleRequest": {
+        "type": "object",
+        "properties": {
+          "scheduleId": {
+            "type": "number"
+          },
+          "invokerName": {
+            "type": "string"
+          },
+          "cacheOptions": {
+            "type": "string"
+          },
+          "sessionData": {
+            "$ref": "#/components/schemas/SessionData"
+          }
+        }
+      },
+      "QuickwinScheduleResponse": {
+        "type": "object",
+        "properties": {
+          "met": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MDSScheduleData": {
+        "type": "object",
+        "properties": {
+          "scheduleDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleDetail"
+            }
+          }
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "properties": {
+          "scheduleId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dateToEvaluate": {
+            "type": "string"
+          },
+          "dateFormat": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "ScheduleDetail": {
+        "type": "object",
+        "properties": {
+          "scheduleDetailId": {
+            "type": "number"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "description": {
+            "type": "string"
+          },
+          "hourFrom": {
+            "type": "string"
+          },
+          "hourUntil": {
+            "type": "string"
+          },
+          "day": {
+            "type": "string"
+          },
+          "month": {
+            "type": "string"
+          },
+          "weekday": {
+            "type": "string"
+          },
+          "expression": {
+            "type": "string"
+          },
+          "successMessage": {
+            "type": "string"
+          },
+          "failMessage": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "ExternalResourceComponents": {
+        "type": "object",
+        "properties": {
+          "externalResourceComponentId": {
+            "type": "number"
+          },
+          "externalResources": {
+            "$ref": "#/components/schemas/ExternalResources"
+          },
+          "endpointUrl": {
+            "type": "string"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "routingType": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "weight": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "ExternalResourceGroups": {
+        "type": "object",
+        "properties": {
+          "externalResourceGroupId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ExternalResources": {
+        "type": "object",
+        "properties": {
+          "externalResourceId": {
+            "type": "number"
+          },
+          "externalResourceGroups": {
+            "$ref": "#/components/schemas/ExternalResourceGroups"
+          },
+          "operationNameDescription": {
+            "type": "string"
+          },
+          "resourceDescription": {
+            "type": "string"
+          },
+          "requestPatternXslt": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "extResType": {
+            "type": "string"
+          },
+          "requestMethod": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": "string"
+          }
+        }
+      },
+      "Invoke": {
+        "type": "object",
+        "properties": {
+          "invokeId": {
+            "type": "number"
+          },
+          "externalResources": {
+            "$ref": "#/components/schemas/ExternalResources"
+          },
+          "operationNameDescription": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "retries": {
+            "type": "number"
+          },
+          "timeBetweenRetries": {
+            "type": "number"
+          },
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          }
+        }
+      },
+      "InvokeMapping": {
+        "type": "object",
+        "properties": {
+          "invokeMappingId": {
+            "type": "number"
+          },
+          "subscriberProperties": {
+            "$ref": "#/components/schemas/SubscriberProperties"
+          },
+          "invoke": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "attributeType": {
+            "type": "string"
+          },
+          "functionId": {
+            "type": "string"
+          },
+          "fixedValue": {
+            "type": "string"
+          },
+          "way": {
+            "type": "string"
+          },
+          "typeToExtract": {
+            "type": "string"
+          },
+          "xpathToXmlString": {
+            "type": "string"
+          },
+          "xpath": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "InvokeResponseEvaluation": {
+        "type": "object",
+        "properties": {
+          "invokeResponseEvaluationId": {
+            "type": "number"
+          },
+          "invoke": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "xpath": {
+            "type": "string"
+          },
+          "evaluationType": {
+            "type": "string"
+          },
+          "expectedValue": {
+            "type": "string"
+          },
+          "valueType": {
+            "type": "string"
+          },
+          "evaluationOperator": {
+            "type": "string"
+          },
+          "success": {
+            "type": "string"
+          },
+          "failureMessage": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "successCode": {
+            "type": "string"
+          },
+          "failCode": {
+            "type": "string"
+          },
+          "successMessage": {
+            "type": "string"
+          },
+          "inExpectedValues": {
+            "type": "string"
+          },
+          "inValues": {
+            "type": "string"
+          },
+          "inValuesSep": {
+            "type": "string"
+          }
+        }
+      },
+      "MDSInvokeData": {
+        "type": "object",
+        "properties": {
+          "invokeMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvokeMapping"
+            }
+          },
+          "invokeResponseEvaluations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvokeResponseEvaluation"
+            }
+          },
+          "externalResourceComponentses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalResourceComponents"
+            }
+          }
+        }
+      },
+      "SubscriberProperties": {
+        "type": "object",
+        "properties": {
+          "subscriberPropertyId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "FunctionDomains": {
+        "type": "object",
+        "properties": {
+          "functionDomId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "functionFile": {
+            "type": "string"
+          },
+          "sourceCode": {
+            "type": "string"
+          },
+          "functionType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Functions": {
+        "type": "object",
+        "properties": {
+          "functionId": {
+            "type": "number"
+          },
+          "functionDomains": {
+            "$ref": "#/components/schemas/FunctionDomains"
+          },
+          "functionName": {
+            "type": "string"
+          },
+          "resultKey": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "MDSDynamycFunctionCallData": {
+        "type": "object",
+        "properties": {
+          "functions": {
+            "$ref": "#/components/schemas/Functions"
+          }
+        }
+      },
+      "DefinedFunctionBindings": {
+        "type": "object",
+        "properties": {
+          "definedFunctionBindingId": {
+            "type": "number"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "definedFunctionParams": {
+            "$ref": "#/components/schemas/DefinedFunctionParams"
+          },
+          "bindingType": {
+            "type": "string"
+          },
+          "subscriberProperties": {
+            "$ref": "#/components/schemas/SubscriberProperties"
+          },
+          "fixedValue": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DefinedFunctionCall": {
+        "type": "object",
+        "properties": {
+          "definedFunctionCallId": {
+            "type": "number"
+          },
+          "definedFunction": {
+            "$ref": "#/components/schemas/DefinedFunctions"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DefinedFunctionParams": {
+        "type": "object",
+        "properties": {
+          "definedFunctionParamId": {
+            "type": "number"
+          },
+          "definedFunction": {
+            "$ref": "#/components/schemas/DefinedFunctions"
+          },
+          "name": {
+            "type": "string"
+          },
+          "defaultValue": {
+            "type": "string"
+          },
+          "way": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DefinedFunctions": {
+        "type": "object",
+        "properties": {
+          "definedFunctionId": {
+            "type": "string"
+          },
+          "definedFunctionName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "MDSDefinedFunctionCallData": {
+        "type": "object",
+        "properties": {
+          "definedFunctionBindings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DefinedFunctionBindings"
+            }
+          }
+        }
+      },
+      "Condition": {
+        "type": "object",
+        "properties": {
+          "conditionId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "ConditionGroup": {
+        "type": "object",
+        "properties": {
+          "conditionGroupId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "ConditionGroupElement": {
+        "type": "object",
+        "properties": {
+          "conditionGroupElementId": {
+            "type": "number"
+          },
+          "elementOrder": {
+            "type": "number"
+          },
+          "forwardOperator": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "conditionGroupElement": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          }
+        }
+      },
+      "MDSConditionGroupData": {
+        "type": "object",
+        "properties": {
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "conditionGroupElements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConditionGroupElement"
+            }
+          }
+        }
+      },
+      "ConditionProperties": {
+        "type": "object",
+        "properties": {
+          "conditionPropertyId": {
+            "type": "number"
+          },
+          "subscriberProperties": {
+            "$ref": "#/components/schemas/SubscriberProperties"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "domain": {
+            "$ref": "#/components/schemas/Domain"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "dataType": {
+            "type": "string"
+          },
+          "expressionCondition": {
+            "type": "string"
+          },
+          "minNumDomainElements": {
+            "type": "number"
+          },
+          "maxNumDomainElements": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "failMessage": {
+            "type": "string"
+          },
+          "successMessage": {
+            "type": "string"
+          },
+          "dataTypeFormat": {
+            "type": "string"
+          },
+          "successCode": {
+            "type": "string"
+          },
+          "failCode": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Domain": {
+        "type": "object",
+        "properties": {
+          "domainId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DomainElements": {
+        "type": "object",
+        "properties": {
+          "domainElementId": {
+            "type": "number"
+          },
+          "domain": {
+            "$ref": "#/components/schemas/Domain"
+          },
+          "elementValue": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DomainElementsRepo": {
+        "type": "object",
+        "properties": {
+          "domainElements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainElements"
+            }
+          }
+        }
+      },
+      "DomainValueRanges": {
+        "type": "object",
+        "properties": {
+          "domainValueRangeId": {
+            "type": "number"
+          },
+          "domain": {
+            "$ref": "#/components/schemas/Domain"
+          },
+          "fromValue": {
+            "type": "string"
+          },
+          "toValue": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DomainValueRangesRepo": {
+        "type": "object",
+        "properties": {
+          "domainValueRangeses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainValueRanges"
+            }
+          }
+        }
+      },
+      "MDSConditionData": {
+        "type": "object",
+        "properties": {
+          "conditionProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConditionProperties"
+            }
+          },
+          "domainElementsesRepos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainElementsRepo"
+            }
+          },
+          "domainValueRangesesRepos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainValueRangesRepo"
+            }
+          }
+        }
+      },
+      "Behaviour": {
+        "type": "object",
+        "properties": {
+          "behaviourId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "BehaviourBlockings": {
+        "type": "object",
+        "properties": {
+          "behaviourBlockingId": {
+            "type": "number"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/NotificationGroup"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "executionPriority": {
+            "type": "string"
+          },
+          "required": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourBlockingsRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourBlockingses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourBlockings"
+            }
+          }
+        }
+      },
+      "BehaviourEnrichment": {
+        "type": "object",
+        "properties": {
+          "behaviourEnrichmentId": {
+            "type": "number"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/NotificationGroup"
+          },
+          "invoke": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "required": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "whenRespNotSuccess": {
+            "type": "string"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "executionPriority": {
+            "type": "string"
+          },
+          "retries": {
+            "type": "number"
+          },
+          "applyCompensation": {
+            "type": "string"
+          },
+          "invokeCompensationForward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "invokeCompensationBackward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "loopingOperation": {
+            "$ref": "#/components/schemas/LoopingOperation"
+          },
+          "copyFromSubsToSubs": {
+            "type": "string"
+          },
+          "applyOperationRetry": {
+            "type": "string"
+          },
+          "loopingBreakingSP": {
+            "type": "string"
+          },
+          "loopingBreakingOP": {
+            "type": "string"
+          },
+          "loopingBreakingValue": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourEnrichmentProperty": {
+        "type": "object",
+        "properties": {
+          "behaviourEnrichePropertyId": {
+            "type": "number"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "when": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "sessionData": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "executionPriority": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourEnrichmentPropertyRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourEnrichmentProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourEnrichmentProperty"
+            }
+          }
+        }
+      },
+      "BehaviourEnrichmentRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourEnrichments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourEnrichment"
+            }
+          }
+        }
+      },
+      "BehaviourExclusions": {
+        "type": "object",
+        "properties": {
+          "behaviourExclusionId": {
+            "type": "number"
+          },
+          "productTypesByProductTypeIdToGet": {
+            "$ref": "#/components/schemas/ProductTypes"
+          },
+          "offerTypesByExcludedOfferTypeId": {
+            "$ref": "#/components/schemas/OfferTypes"
+          },
+          "offerTypesByOfferTypeIdToGet": {
+            "$ref": "#/components/schemas/OfferTypes"
+          },
+          "productTypesByExcludedProductTypeId": {
+            "$ref": "#/components/schemas/ProductTypes"
+          },
+          "getType": {
+            "type": "string"
+          },
+          "excludedType": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          },
+          "offerIdByExcludedOfferId": {
+            "type": "number"
+          },
+          "offerIdByOfferIdToGet": {
+            "type": "number"
+          },
+          "productIdByExcludedProductId": {
+            "type": "string"
+          },
+          "productIdByProductIdToGet": {
+            "type": "string"
+          }
+        }
+      },
+      "BehaviourExclusionsRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourExclusionses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourExclusions"
+            }
+          }
+        }
+      },
+      "BehaviourNotification": {
+        "type": "object",
+        "properties": {
+          "behaviourNotificationId": {
+            "type": "number"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/NotificationGroup"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "required": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourNotificationRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourNotifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourNotification"
+            }
+          }
+        }
+      },
+      "BehaviourOfferAddons": {
+        "type": "object",
+        "properties": {
+          "behaviourOfferAddonId": {
+            "type": "number"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "offerGroups": {
+            "$ref": "#/components/schemas/OfferGroups"
+          },
+          "description": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "evalPriority": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          },
+          "offerId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourOfferAddonsRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourOfferAddonses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourOfferAddons"
+            }
+          }
+        }
+      },
+      "BehaviourOperInvoke": {
+        "type": "object",
+        "properties": {
+          "behaviourOperInvokeId": {
+            "type": "number"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/NotificationGroup"
+          },
+          "invoke": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "required": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "sync": {
+            "type": "string"
+          },
+          "sessionData": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "whenRespNotSuccess": {
+            "type": "string"
+          },
+          "retries": {
+            "type": "number"
+          },
+          "applyCompensation": {
+            "type": "string"
+          },
+          "invokeCompensationForward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "invokeCompensationBackward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "loopingOperation": {
+            "$ref": "#/components/schemas/LoopingOperation"
+          },
+          "copyFromSubsToSubs": {
+            "type": "string"
+          },
+          "applyOperationRetry": {
+            "type": "string"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "executionPriority": {
+            "type": "string"
+          },
+          "loopingBreakingSP": {
+            "type": "string"
+          },
+          "loopingBreakingOP": {
+            "type": "string"
+          },
+          "loopingBreakingValue": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourOperInvokeRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourOperInvokes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourOperInvoke"
+            }
+          }
+        }
+      },
+      "BehaviourOperStages": {
+        "type": "object",
+        "properties": {
+          "behaviourOperStageId": {
+            "type": "number"
+          },
+          "stages": {
+            "$ref": "#/components/schemas/Stages"
+          },
+          "behaviourOperation": {
+            "$ref": "#/components/schemas/BehaviourOperation"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "BehaviourOperStagesRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourOperStageses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourOperStages"
+            }
+          }
+        }
+      },
+      "BehaviourOperation": {
+        "type": "object",
+        "properties": {
+          "behaviourOperationId": {
+            "type": "number"
+          },
+          "operationTypes": {
+            "$ref": "#/components/schemas/OperationTypes"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "retries": {
+            "type": "number"
+          },
+          "timeBetweenRetries": {
+            "type": "number"
+          },
+          "mep": {
+            "type": "string"
+          },
+          "responseProperties": {
+            "type": "string"
+          },
+          "dinamicLoggingXslt": {
+            "type": "string"
+          },
+          "dinamicLoggingCollection": {
+            "type": "string"
+          },
+          "dinamicLoggingMongoUrl": {
+            "type": "string"
+          },
+          "applyCompensation": {
+            "type": "string"
+          },
+          "invokeCompensationForward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "invokeCompensationBackward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "behaviourId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourPrice": {
+        "type": "object",
+        "properties": {
+          "behaviourPriceId": {
+            "type": "number"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "offers": {
+            "$ref": "#/components/schemas/Offers"
+          },
+          "products": {
+            "$ref": "#/components/schemas/Products"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "description": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourPriceRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourPrice"
+            }
+          }
+        }
+      },
+      "BehaviourProduct": {
+        "type": "object",
+        "properties": {
+          "behaviourProductId": {
+            "type": "number"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "provisionBy": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "offerRecurrency": {
+            "$ref": "#/components/schemas/OfferRecurency"
+          },
+          "dateToEvaluate": {
+            "type": "string"
+          },
+          "dateFormat": {
+            "type": "string"
+          },
+          "childCalendarParams": {
+            "type": "string"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          },
+          "offerId": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "string"
+          }
+        }
+      },
+      "BehaviourProductRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourProductsRepos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourProduct"
+            }
+          }
+        }
+      },
+      "BehaviourValidations": {
+        "type": "object",
+        "properties": {
+          "behaviourValidationId": {
+            "type": "number"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/NotificationGroup"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "executionPriority": {
+            "type": "string"
+          },
+          "required": {
+            "type": "string"
+          },
+          "behaviourOperStageId": {
+            "type": "number"
+          }
+        }
+      },
+      "BehaviourValidationsRepo": {
+        "type": "object",
+        "properties": {
+          "behaviourValidationses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourValidations"
+            }
+          }
+        }
+      },
+      "Campaign": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "number"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "behaviour": {
+            "$ref": "#/components/schemas/Behaviour"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "longDescription": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "LoopingOperation": {
+        "type": "object",
+        "properties": {
+          "loopingOperationId": {
+            "type": "number"
+          },
+          "maxNumIteration": {
+            "type": "string"
+          },
+          "maxNumIterationType": {
+            "type": "string"
+          },
+          "copyFromSubsToSubs": {
+            "type": "string"
+          },
+          "loopingSubscribersPrefix": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "loopingBreakingSP": {
+            "type": "string"
+          },
+          "loopingBreakingOP": {
+            "type": "string"
+          },
+          "loopingBreakingValue": {
+            "type": "string"
+          }
+        }
+      },
+      "MDSData": {
+        "type": "object",
+        "properties": {
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          },
+          "ofertaProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OfertaProductos"
+            }
+          },
+          "behaviourProductsRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourProductRepo"
+            }
+          },
+          "behaviourOfferAddonsesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourOfferAddonsRepo"
+            }
+          },
+          "behaviourExclusionsesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourExclusionsRepo"
+            }
+          },
+          "behaviourEnrichmentsRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourEnrichmentRepo"
+            }
+          },
+          "behaviourEnrichmentPropertiesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourEnrichmentPropertyRepo"
+            }
+          },
+          "behaviourBlockingsesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourBlockingsRepo"
+            }
+          },
+          "behaviourValidationsesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourValidationsRepo"
+            }
+          },
+          "behaviourOperInvokesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourOperInvokeRepo"
+            }
+          },
+          "behaviourNotificationsRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourNotificationRepo"
+            }
+          },
+          "behaviourPricesRepo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourPriceRepo"
+            }
+          },
+          "behaviourOperStagesRepos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourOperStagesRepo"
+            }
+          },
+          "productTypeProvisionings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductTypeProvisioning"
+            }
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "NotificationGroup": {
+        "type": "object",
+        "properties": {
+          "notificationGroupId": {
+            "type": "number"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "longDescription": {
+            "type": "string"
+          },
+          "scheduleId": {
+            "type": "number"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "OfertaProductos": {
+        "type": "object",
+        "properties": {
+          "offer": {
+            "$ref": "#/components/schemas/Offers"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Products"
+            }
+          }
+        }
+      },
+      "OfferGroups": {
+        "type": "object",
+        "properties": {
+          "offerGroupId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "OfferRecurency": {
+        "type": "object",
+        "properties": {
+          "offerRecurrencyId": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "OfferTypes": {
+        "type": "object",
+        "properties": {
+          "offerTypeId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Offers": {
+        "type": "object",
+        "properties": {
+          "offerId": {
+            "type": "number"
+          },
+          "offerTypes": {
+            "$ref": "#/components/schemas/OfferTypes"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "longDescription": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "externalOfferId": {
+            "type": "string"
+          }
+        }
+      },
+      "OperationTypes": {
+        "type": "object",
+        "properties": {
+          "operationTypeId": {
+            "type": "string"
+          },
+          "operationName": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductTypeProvisioning": {
+        "type": "object",
+        "properties": {
+          "productTypeProvisioningId": {
+            "type": "number"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/NotificationGroup"
+          },
+          "invoke": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "productTypes": {
+            "$ref": "#/components/schemas/ProductTypes"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "sync": {
+            "type": "string"
+          },
+          "required": {
+            "type": "string"
+          },
+          "sessionData": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "whenCondition": {
+            "type": "string"
+          },
+          "whenRespNotSuccess": {
+            "type": "string"
+          },
+          "syncRetries": {
+            "type": "number"
+          },
+          "applyCompensation": {
+            "type": "string"
+          },
+          "invokeCompensationForward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "invokeCompensationBackward": {
+            "$ref": "#/components/schemas/Invoke"
+          },
+          "applyOperationRetry": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "whenSchedule": {
+            "type": "string"
+          },
+          "conditionGroup": {
+            "$ref": "#/components/schemas/ConditionGroup"
+          },
+          "definedFunctionCall": {
+            "$ref": "#/components/schemas/DefinedFunctionCall"
+          },
+          "executionPriority": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductTypes": {
+        "type": "object",
+        "properties": {
+          "productTypeId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Products": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "productTypes": {
+            "$ref": "#/components/schemas/ProductTypes"
+          },
+          "description": {
+            "type": "string"
+          },
+          "externalCodeId": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Stages": {
+        "type": "object",
+        "properties": {
+          "stageId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "BehaviourLogging": {
+        "type": "object",
+        "properties": {
+          "behaviourLoggingId": {
+            "type": "number"
+          },
+          "action": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          },
+          "operationId": {
+            "type": "number"
+          },
+          "subscriberId": {
+            "type": "string"
+          },
+          "externalTransactionId": {
+            "type": "string"
+          },
+          "remoteIp": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "errorLevel": {
+            "type": "string"
+          },
+          "orderBy": {
+            "type": "number"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "MDSLoggingData": {
+        "type": "object",
+        "properties": {
+          "behaviourLoggings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BehaviourLogging"
+            }
+          }
+        }
+      },
+      "ClearCacheResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "cleared": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IMDSData": {
+        "type": "object",
+        "properties": {
+          "refreshMessage": {
+            "type": "string"
+          },
+          "updated": {
+            "type": "boolean"
+          },
+          "listCleared": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClearCacheResponse"
+            }
+          },
+          "loggingData": {
+            "$ref": "#/components/schemas/MDSLoggingData"
+          },
+          "mdsScheduleData": {
+            "$ref": "#/components/schemas/MDSScheduleData"
+          },
+          "mdsConditionData": {
+            "$ref": "#/components/schemas/MDSConditionData"
+          },
+          "mdsinvokeData": {
+            "$ref": "#/components/schemas/MDSInvokeData"
+          },
+          "mdsdynamycFunctionCallData": {
+            "$ref": "#/components/schemas/MDSDynamycFunctionCallData"
+          },
+          "mdsdefinedFunctionCallData": {
+            "$ref": "#/components/schemas/MDSDefinedFunctionCallData"
+          },
+          "mdsconditionGroupData": {
+            "$ref": "#/components/schemas/MDSConditionGroupData"
+          }
+        }
+      }
+    }
+  }
+}
