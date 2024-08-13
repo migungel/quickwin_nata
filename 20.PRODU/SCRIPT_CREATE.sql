@@ -32,10 +32,91 @@ DECLARE
           "subscriberPropertyId":"SMDP_ADDRESS"
         }
       ]';
+  lv_session_data             VARCHAR2(32767) := '[
+ {
+    "id":"INFORMATION_SERVICE",
+    "value":[
+      "Esim:updateEstadoPorICCID"    
+    ]
+  },
+  {
+    "id":"ESTADO",
+    "value":[
+      "U"    
+    ]
+  },
+  {
+    "id":"COMENTARIOS",
+    "value":[
+      "Se actualiza estado de ICCID a Utilizado"    
+    ]
+  },{
+    "id":"STATUS",
+    "value":[
+      "Execute-Success"    
+    ]
+  },{
+    "id":"MATCHING_ID",
+    "value":[
+      "DKA73E08L23XVVB9DBPSKCXQWR8WBBT0BWF2UYNC3AK6FRPDH3LGQD2ZO61XXVVI"    
+    ]
+  },{
+    "id":"SMDP_ADDRESS",
+    "value":[
+      "claroecuador.validspereachdpplus.com"    
+    ]
+  } 
+]';
+
+  lv_data VARCHAR2(32767) := '[
+  {
+    "id":"INFORMATION_SERVICE",
+    "value":[
+      "ESIM:ConsultaICCIDCompleto"    
+    ]
+  },{
+    "id":"ESTADO",
+    "value":[
+      "R"    
+    ]
+  },{
+    "id":"STATUS",
+    "value":[
+      "FAILED"    
+    ]
+  }
+  ]';
+
+  lv_data2 VARCHAR2(32767) := '[
+  {
+    "id":"STATUS",
+    "value":[
+      "FAILED"    
+    ]
+  }
+  ]';
+
+  lv_data3 VARCHAR2(32767) := '[
+  {
+    "id":"STATUS",
+    "value":[
+      "Execute-Success"
+    ]
+  },{
+    "id":"MATCHING_ID",
+    "value":[
+      "DKA73E08L23XVVB9DBPSKCXQWR8WBBT0BWF2UYNC3AK6FRPDH3LGQD2ZO61XXVVI"
+    ]
+  },{
+    "id":"SMDP_ADDRESS",
+    "value":[
+      "claroecuador.validspereachdpplus.com"
+    ]
+  } 
+  ]';
 
   ln_beh_oper_invoke_id1  NUMBER;
   ln_beh_oper_invoke_id2  NUMBER;
-  ln_beh_oper_invoke_id3  NUMBER;
   ln_ext_res_group_id1     NUMBER := 0;
   ln_ext_res_group_id2     NUMBER := 0;
   ln_ext_res_group_id3     NUMBER := 0;
@@ -45,19 +126,9 @@ DECLARE
   ln_invoke_id1           NUMBER := 0;
   ln_invoke_id2           NUMBER := 0;
   ln_invoke_id3           NUMBER := 0;
-  ln_function_name        VARCHAR2(100) := 'calcularDiferenciaEnDias';
-  ln_function_dom_id      NUMBER := 0;
-  ln_function_id          NUMBER := 0;
-  lv_def_func_id          VARCHAR(150) := 'EXECUTE_ANY_FUNCTION';
-  ln_def_func_call_id     NUMBER := 0;
-  ln_id_param             NUMBER := 0;
   ln_condition_id1        NUMBER := 0;
-  ln_condition_id2        NUMBER := 0;
   ln_domain_id1           NUMBER := 0;
-  ln_domain_id2           NUMBER := 0;
-  ln_domain_value_range_id NUMBER := 0;
   ln_condition_property_id1 NUMBER := 0;
-  ln_condition_property_id2 NUMBER := 0;
 
   SP_COUNTER              NUMBER:=0;
   -- SUBSCRIBER PROPERTIES NAMES
@@ -96,7 +167,14 @@ BEGIN
   -- RESOURCE GROUP
   SELECT Nvl(Max(E.EXTERNAL_RESOURCE_GROUP_ID),0) + 1 INTO ln_ext_res_group_id1 FROM EXTERNAL_RESOURCE_GROUPS E
   WHERE  Upper(s.description) LIKE Upper('%[22385]%') AND Upper(s.description) LIKE Upper('%ConfirmOrder%');
+
+  SELECT Nvl(Max(E.EXTERNAL_RESOURCE_GROUP_ID),0) + 1 INTO ln_ext_res_group_id2 FROM EXTERNAL_RESOURCE_GROUPS E
+  WHERE  Upper(s.description) LIKE Upper('%[22385]%') AND Upper(s.description) LIKE Upper('%Grupo para Esim:updateEstadoPorICCID%');
+
+  SELECT Nvl(Max(E.EXTERNAL_RESOURCE_GROUP_ID),0) + 1 INTO ln_ext_res_group_id3 FROM EXTERNAL_RESOURCE_GROUPS E
+  WHERE  Upper(s.description) LIKE Upper('%[22385]%') AND Upper(s.description) LIKE Upper('%DownloadOrder%');
   --YA DEBERIAN EXISTIR LOS GRUPOS DE RECURSOS PORQUE ES CLONADO ?
+
   --INSERT INTO EXTERNAL_RESOURCE_GROUPS (EXTERNAL_RESOURCE_GROUP_ID, DESCRIPTION)
   --VALUES(ln_ext_res_group_id1,lv_desc_camp||lv_description);
 
@@ -238,7 +316,7 @@ BEGIN
   -- EXTERNAL RESOURCE
   SELECT Nvl(Max(E.external_resource_id),0)+1 INTO ln_ext_res_id1 FROM external_resources E;
   insert into external_resources (external_resource_id,external_resource_group_id,operation_name_description,resource_description,request_pattern_xslt,timeout,status,ext_res_type,request_method,content_type,data_type)
-  values (ln_ext_res_id1,ln_ext_res_group_id,lv_desc_camp||'eSIM QR Code - API ConfirmOrder',lv_desc_camp||'API Confirm Order [HUB IOT]','<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  values (ln_ext_res_id1,ln_ext_res_group_id1,lv_desc_camp||'eSIM QR Code - API ConfirmOrder',lv_desc_camp||'API Confirm Order [HUB IOT]','<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output  method="text" indent="yes" media-type="text/json" omit-xml-declaration="yes"/>
     <xsl:template match="/">
     {
@@ -261,7 +339,7 @@ BEGIN
 
   SELECT Nvl(Max(E.external_resource_id),0)+1 INTO ln_ext_res_id2 FROM external_resources E;
   INSERT INTO external_resources (external_resource_id,external_resource_group_id,operation_name_description,resource_description,request_pattern_xslt,timeout,status,ext_res_type,request_method,content_type,data_type)
-  VALUES (ln_ext_res_id2,ln_ext_res_group_id,lv_desc_camp||'eSIM QR Code - MicroPersistor Esim:updateEstadoPorICCID',lv_desc_camp||'Actualiza el estado de los ICCID en la tabala ESIM_FILE',
+  VALUES (ln_ext_res_id2,ln_ext_res_group_id2,lv_desc_camp||'eSIM QR Code - MicroPersistor Esim:updateEstadoPorICCID',lv_desc_camp||'Actualiza el estado de los ICCID en la tabala ESIM_FILE',
     '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output  method="text" indent="yes" media-type="text/json" omit-xml-declaration="yes"/>
   <xsl:template match="/">
@@ -297,7 +375,7 @@ BEGIN
 
   SELECT Nvl(Max(E.external_resource_id),0)+1 INTO ln_ext_res_id3 FROM external_resources E;
   insert into external_resources (external_resource_id,external_resource_group_id,operation_name_description,resource_description,request_pattern_xslt,timeout,status,ext_res_type,request_method,content_type,data_type)
-  values (ln_ext_res_id3,ln_ext_res_group_id,lv_desc_camp||'eSIM QR Code - MicroEis ESIM:ConsultaICCIDCompleto',lv_desc_camp||'Consulta de ICCID completo atravez de ICCID con 18 digitos',
+  values (ln_ext_res_id3,ln_ext_res_group_id3,lv_desc_camp||'eSIM QR Code - MicroEis ESIM:ConsultaICCIDCompleto',lv_desc_camp||'Consulta de ICCID completo atravez de ICCID con 18 digitos',
   '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output  method="text" indent="yes" media-type="text/json" omit-xml-declaration="yes"/>
 <xsl:template match="/">
@@ -320,16 +398,13 @@ BEGIN
 
   -- EXTERNAL RESOURCE COMPONENTS
   INSERT INTO external_resource_components (external_resource_component_id,external_resource_id,endpoint_url,short_description,routing_type,order_by,weight)
-  VALUES ((SELECT Nvl(Max(EC.external_resource_component_id),0)+1 FROM external_resource_components EC),
-  ln_ext_res_id1,URI_CONFIRMORDER,lv_desc_camp||'eSIM QR Code - Endpoint API ConfirmOrder','B',10,100);
+  VALUES ((SELECT Nvl(Max(EC.external_resource_component_id),0)+1 FROM external_resource_components EC),ln_ext_res_id1,URI_CONFIRMORDER,lv_desc_camp||'eSIM QR Code - Endpoint API ConfirmOrder','B',10,100);
 
   INSERT INTO external_resource_components (external_resource_component_id,external_resource_id,endpoint_url,short_description,routing_type,order_by,weight)
-  VALUES ((SELECT Nvl(Max(EC.external_resource_component_id),0)+1 FROM external_resource_components EC),
-  ln_ext_res_id2,URI_MICROPERSISTOR,lv_desc_camp||'eSIM QR Code- Endpoint de MicroPersistor Esim:updateEstadoPorICCID','B',10,100);
+  VALUES ((SELECT Nvl(Max(EC.external_resource_component_id),0)+1 FROM external_resource_components EC),ln_ext_res_id2,URI_MICROPERSISTOR,lv_desc_camp||'eSIM QR Code- Endpoint de MicroPersistor Esim:updateEstadoPorICCID','B',10,100);
 
   INSERT INTO external_resource_components (external_resource_component_id,external_resource_id,endpoint_url,short_description,routing_type,order_by,weight)
-  VALUES ((SELECT Nvl(Max(EC.external_resource_component_id),0)+1 FROM external_resource_components EC),
-  ln_ext_res_id3,URI_MICROEIS,lv_desc_camp||'eSIM QR Code- Endpoint de MicroEis','B',10,100);
+  VALUES ((SELECT Nvl(Max(EC.external_resource_component_id),0)+1 FROM external_resource_components EC),ln_ext_res_id3,URI_MICROEIS,lv_desc_camp||'eSIM QR Code- Endpoint de MicroEis','B',10,100);
 
   -- INVOKE
   SELECT Nvl(Max(I.invoke_id),0)+1 INTO ln_invoke_id1 FROM invoke I;
@@ -474,141 +549,66 @@ BEGIN
 
   -- BEHAVIOUR_OPERATION - AGREGAR TODOS LOS CAMPOS QUE SE NECESITEN
   SELECT Nvl(Max(BO.behaviour_operation_id),0) + 1 INTO ln_beh_operation_id FROM behaviour_operation BO;
-  INSERT INTO behaviour_operation (behaviour_operation_id,behaviour_id,operation_type_id,description)
-  VALUES (ln_beh_operation_id,ln_behaviour_id,ln_operation_type_id1,lv_desc_camp||lv_description);
+  INSERT INTO behaviour_operation (behaviour_operation_id,behaviour_id,operation_type_id,description,response_properties)
+  VALUES (ln_beh_operation_id,ln_behaviour_id,ln_operation_type_id1,lv_desc_camp||lv_description,lv_response_properties);
   
   -- Creacion del esqueleto o STAGES
   SELECT Nvl(Max(BS.behaviour_oper_stage_id),0) + 1 INTO ln_beh_oper_stage_id1 FROM behaviour_oper_stages BS;
   INSERT INTO behaviour_oper_stages (behaviour_oper_stage_id,stage_id,order_by,behaviour_operation_id)
-  VALUES (ln_beh_oper_stage_id1,lv_stage,10,ln_beh_operation_id);
+  VALUES (ln_beh_oper_stage_id1,lv_invoke,10,ln_beh_operation_id);
 
   SELECT NVL(MAX(BS.BEHAVIOUR_OPER_STAGE_ID),0) + 1 INTO ln_beh_oper_stage_id2 FROM BEHAVIOUR_OPER_STAGES BS;
   INSERT INTO behaviour_oper_stages (BEHAVIOUR_OPER_STAGE_ID,STAGE_ID,ORDER_BY,BEHAVIOUR_OPERATION_ID)
-  VALUES (ln_beh_oper_stage_id2,lv_validation,20,ln_beh_operation_id);
-
-  SELECT NVL(MAX(BS.BEHAVIOUR_OPER_STAGE_ID),0) + 1 INTO ln_beh_oper_stage_id3 FROM BEHAVIOUR_OPER_STAGES BS;
-  INSERT INTO behaviour_oper_stages (BEHAVIOUR_OPER_STAGE_ID,STAGE_ID,ORDER_BY,BEHAVIOUR_OPERATION_ID)
-  VALUES (ln_beh_oper_stage_id3,lv_stage,30,ln_beh_operation_id);
-
-  SELECT NVL(MAX(BS.BEHAVIOUR_OPER_STAGE_ID),0) + 1 INTO ln_beh_oper_stage_id4 FROM BEHAVIOUR_OPER_STAGES BS;
-  INSERT INTO behaviour_oper_stages (BEHAVIOUR_OPER_STAGE_ID,STAGE_ID,ORDER_BY,BEHAVIOUR_OPERATION_ID)
-  VALUES (ln_beh_oper_stage_id4,lv_validation,40,ln_beh_operation_id);
-
-  SELECT NVL(MAX(BS.BEHAVIOUR_OPER_STAGE_ID),0) + 1 INTO ln_beh_oper_stage_id5 FROM BEHAVIOUR_OPER_STAGES BS;
-  INSERT INTO behaviour_oper_stages (BEHAVIOUR_OPER_STAGE_ID, STAGE_ID, ORDER_BY,BEHAVIOUR_OPERATION_ID)
-  VALUES (ln_beh_oper_stage_id5,lv_stage,50,ln_beh_operation_id);
+  VALUES (ln_beh_oper_stage_id2,lv_dynamic_bl,20,ln_beh_operation_id);
 
 
-  -- BEHAVIOUR OPER INVOKE (QueryAccount)
+  -- BEHAVIOUR OPER INVOKE (CONFIRMORDER)
   SELECT Nvl(Max(BI.behaviour_oper_invoke_id),0)+1 INTO ln_beh_oper_invoke_id1 FROM behaviour_oper_invoke BI;
   INSERT INTO behaviour_oper_invoke (behaviour_oper_invoke_id,behaviour_oper_stage_id,when,condition_id,invoke_id,order_by,required,status,sync,notification_group_id,session_data,schedule_id,when_condition,when_schedule,when_resp_not_success,retries,apply_compensation,invoke_id_comp_backward,invoke_id_comp_forward,condition_group_id,looping_operation_id,copy_from_subs_to_subs)
-  VALUES (ln_beh_oper_invoke_id1,ln_beh_oper_stage_id1,'PRE',null,ln_invoke_id1,10,'YES','A','YES',null,'',null,null,'','',0,'NO','','','',null,'');
+  VALUES (ln_beh_oper_invoke_id1,ln_beh_oper_stage_id1,'POST',null,ln_invoke_id1,10,'YES','A','YES',null,'[]',null,null,'','',0,'NO','','','',null,'');
 
-  -- BEHAVIOUR OPER INVOKE (CreditEngine)
+  -- BEHAVIOUR OPER INVOKE (MICROPERSISTOR)
   SELECT Nvl(Max(BI.behaviour_oper_invoke_id),0)+1 INTO ln_beh_oper_invoke_id2 FROM behaviour_oper_invoke BI;
   INSERT INTO behaviour_oper_invoke (behaviour_oper_invoke_id,behaviour_oper_stage_id,when,condition_id,invoke_id,order_by,required,status,sync,notification_group_id,session_data,schedule_id,when_condition,when_schedule,when_resp_not_success,retries,apply_compensation,invoke_id_comp_backward,invoke_id_comp_forward,condition_group_id,looping_operation_id,copy_from_subs_to_subs)
-  VALUES (ln_beh_oper_invoke_id2,ln_beh_oper_stage_id3,'PRE',null,ln_invoke_id2,10,'YES','A','YES',null,'',null,null,'','',0,'NO','','','',null,'');
+  VALUES (ln_beh_oper_invoke_id2,ln_beh_oper_stage_id1,'POST',null,ln_invoke_id2,20,'YES','A','YES',null,lv_session_data,null,null,'','',0,'NO','','','',null,'');
 
-  -- BEHAVIOUR OPER INVOKE (ChangeAccount)
-  SELECT Nvl(Max(BI.behaviour_oper_invoke_id),0)+1 INTO ln_beh_oper_invoke_id3 FROM behaviour_oper_invoke BI;
-  INSERT INTO behaviour_oper_invoke (behaviour_oper_invoke_id,behaviour_oper_stage_id,when,condition_id,invoke_id,order_by,required,status,sync,notification_group_id,session_data,schedule_id,when_condition,when_schedule,when_resp_not_success,retries,apply_compensation,invoke_id_comp_backward,invoke_id_comp_forward,condition_group_id,looping_operation_id,copy_from_subs_to_subs)
-  values (ln_beh_oper_invoke_id3,ln_beh_oper_stage_id5,'PRE',null,ln_invoke_id3,10,'YES','A','YES',null,'',null,null,'','',0,'NO','','','',null,'');
+  -- BEHAVIOUR ENCRICHMENT INVOKE
+  INSERT INTO behaviour_enrichment (BEHAVIOUR_ENRICHMENT_ID,BEHAVIOUR_OPER_STAGE_ID,CONDITION_ID,INVOKE_ID,ORDER_BY,REQUIRED,STATUS,NOTIFICATION_GROUP_ID,WHEN_RESP_NOT_SUCCESS,CONDITION_GROUP_ID,DEFINED_FUNCTION_CALL_ID,EXECUTION_PRIORITY,RETRIES,APPLY_COMPENSATION,INVOKE_ID_COMP_BACKWARD,INVOKE_ID_COMP_FORWARD)
+  VALUES ((SELECT NVL(MAX(T.behaviour_enrichment_id), 0) + 1 FROM behaviour_enrichment T),ln_beh_oper_stage_id1,NULL,ln_invoke_id3,10,'YES','A',NULL,'','',NULL,'CONDITION',0,'NO','','');
 
-
-  -- FUNCTIONS
-  SELECT nvl(max(t.function_dom_id), 0) + 1 INTO ln_function_dom_id FROM FUNCTION_DOMAINS t;
-  INSERT INTO FUNCTION_DOMAINS (FUNCTION_DOM_ID,DESCRIPTION,FUNCTION_FILE,SOURCE_CODE,STATUS,FUNCTION_TYPE)
-  VALUES (ln_function_dom_id,lv_desc_camp||'Funcion para obtener diferencia de dias a la fecha actual','',
-    'function '||ln_function_name||'(jsonParams) {
-      var params = JSON.parse(jsonParams);
-      var fechaActual = new Date();
-      var externalsubs = params.externalSubscriberProperties;
-      var date = externalsubs.filter(function(x) {
-        return x.id === '''||SP_DATE_LAST_CHANGE||''';
-      });
-      var fechas = date[0].value;
-      var diferenciaEnDias = 9999;
-      if (!(!fechas || fechas.length === 0 || fechas.some(val => val === ""))) {
-        var fecha = date[0].value.map(function(dateString) {
-          return new Date(dateString);
-        });
-        var fechaMasReciente = new Date(Math.max.apply(null,fecha));
-        var diferenciaEnMs = fechaActual - fechaMasReciente;
-        var diferenciaEnDias = Math.floor(diferenciaEnMs/(1000 * 60 * 60 * 24));
-      }
-      res = JSON.stringify({externalSubscriberProperties: [{id:'''||SP_DATE_LAST_CHANGE||''',value:[diferenciaEnDias]}]}); 
-      return res;
-    }','A','JavaScript');
-
-  SELECT nvl(max(f.FUNCTION_ID),0)+1 INTO ln_function_id FROM FUNCTIONS f;
-  INSERT INTO FUNCTIONS (FUNCTION_ID,FUNCTION_NAME,FUCTION_DOM_ID,STATUS,RESULT_KEY)
-  VALUES (ln_function_id,ln_function_name,ln_function_dom_id,'A','sessionData');
-
-  -- DEFINED FUNCTIONS
-  SELECT nvl(max(t.DEFINED_FUNCTION_CALL_ID),0)+1 INTO ln_def_func_call_id FROM DEFINED_FUNCTION_CALL t;
-  INSERT INTO DEFINED_FUNCTION_CALL (DEFINED_FUNCTION_CALL_ID,DEFINED_FUNCTION_ID,DESCRIPTION,STATUS)
-  VALUES (ln_def_func_call_id,lv_def_func_id,lv_desc_camp||'Evalua la fecha '||SP_DATE_LAST_CHANGE||' y retorna la diferencia en dias', 'A');
-  
-  SELECT t.defined_function_param_id INTO ln_id_param FROM DEFINED_FUNCTION_PARAMS t where t.defined_function_id = lv_def_func_id and t.name = 'FUNCTION_ID';
-  INSERT INTO DEFINED_FUNCTION_BINDINGS (DEFINED_FUNCTION_BINDING_ID,DEFINED_FUNCTION_CALL_ID,DEFINED_FUNCTION_PARAM_ID,BINDING_TYPE,SUBSCRIBER_PROPERTY_ID,FIXED_VALUE,STATUS)
-  VALUES ((select nvl(max(T.DEFINED_FUNCTION_BINDING_ID),0)+1 from DEFINED_FUNCTION_BINDINGS T),ln_def_func_call_id,ln_id_param,'FV','',ln_function_id,'A');
-
-  SELECT t.defined_function_param_id into ln_id_param FROM DEFINED_FUNCTION_PARAMS t where t.defined_function_id = lv_def_func_id and t.name = 'ADD_SESSION_DATA';
-  INSERT INTO DEFINED_FUNCTION_BINDINGS (DEFINED_FUNCTION_BINDING_ID,DEFINED_FUNCTION_CALL_ID,DEFINED_FUNCTION_PARAM_ID,BINDING_TYPE,SUBSCRIBER_PROPERTY_ID,FIXED_VALUE,STATUS)
-  VALUES ((select nvl(max(T.DEFINED_FUNCTION_BINDING_ID),0)+1 from DEFINED_FUNCTION_BINDINGS T),ln_def_func_call_id,ln_id_param,'FV','','YES','A');
-
-  --enrichment call
+  -- BEHAVIOUR ENCRICHMENT PROPERTY 1
   INSERT INTO behaviour_enrichment_property (BEHAVIOUR_ENRICHE_PROPERTY_ID,BEHAVIOUR_OPER_STAGE_ID,CONDITION_ID,WHEN,ORDER_BY,SESSION_DATA,STATUS,CONDITION_GROUP_ID,DEFINED_FUNCTION_CALL_ID,EXECUTION_PRIORITY)
-  VALUES ((SELECT NVL(MAX(BP.BEHAVIOUR_ENRICHE_PROPERTY_ID),0)+1 FROM BEHAVIOUR_ENRICHMENT_PROPERTY BP),ln_beh_oper_stage_id2,null,'PRE',10,'[]','A','',ln_def_func_call_id,'FUNCTION');
+  VALUES ((SELECT NVL(MAX(BP.BEHAVIOUR_ENRICHE_PROPERTY_ID),0)+1 FROM BEHAVIOUR_ENRICHMENT_PROPERTY BP),ln_beh_oper_stage_id1,NULL,'PRE',10,lv_data,'A','',NULL,'CONDITION');
 
   -- CONDITION
   SELECT nvl(max(c.condition_id), 0)+1 INTO ln_condition_id1 FROM CONDITION c;
   INSERT INTO CONDITION (CONDITION_ID,DESCRIPTION)
-  VALUES (ln_condition_id1,lv_desc_camp||'Comprobar si '||SP_DAYS_LAST_CHANGE||' >= 30');
-
-  SELECT nvl(max(c.condition_id), 0)+1 INTO ln_condition_id2 FROM CONDITION c;
-  INSERT INTO CONDITION (CONDITION_ID,DESCRIPTION)
-  VALUES (ln_condition_id2,lv_desc_camp||'Comprobar la respuesta del motor de credito');
+  VALUES (ln_condition_id1,lv_desc_camp||'eSIM QR Code - Valida si el estado del ICCID se encuentra vacio');
 
   -- DOMAIN
   SELECT nvl(max(d.domain_id),0)+1 INTO ln_domain_id1 FROM DOMAIN d;
   INSERT INTO DOMAIN (DOMAIN_ID,DESCRIPTION,STATUS)
-  VALUES (ln_domain_id1,lv_desc_camp||'Valida numero dias mayor a 30','A');
-
-  SELECT nvl(max(d.domain_id), 0)+1 INTO ln_domain_id2 FROM DOMAIN d;
-  INSERT INTO DOMAIN (DOMAIN_ID,DESCRIPTION,STATUS)
-  VALUES (ln_domain_id2,lv_desc_camp||'La respuesta debe ser exitosa','A');
-  
+  VALUES (ln_domain_id1,lv_desc_camp||'eSIM QR Code - Dominio con valor vacio','A');
 
   -- DOMAIN ELEMENTS
   INSERT INTO DOMAIN_ELEMENTS SELECT rownum + (SELECT NVL(MAX(DE.DOMAIN_ELEMENT_ID),0) + 1 FROM DOMAIN_ELEMENTS DE) DOMAIN_ELEMENT_ID,
   trim(regexp_substr(valor, '[^,]+', 1, level)) ELEMENT_VALUE,ln_domain_id1 DOMAIN_ID,'A' STATUS
-  FROM (select 30 valor from dual) t CONNECT BY instr(valor, ',', 1, level - 1) > 0;
+  FROM (select '' valor from dual) t CONNECT BY instr(valor, ',', 1, level - 1) > 0;
 
-  INSERT INTO DOMAIN_ELEMENTS SELECT rownum + (SELECT NVL(MAX(DE.DOMAIN_ELEMENT_ID),0) + 1 FROM DOMAIN_ELEMENTS DE) DOMAIN_ELEMENT_ID,
-  trim(regexp_substr(valor, '[^,]+', 1, level)) ELEMENT_VALUE,ln_domain_id2 DOMAIN_ID,'A' STATUS
-  FROM (select 0 valor from dual) t CONNECT BY instr(valor, ',', 1, level - 1) > 0;
-
-  -- DOMAIN VALUE RANGES
-  SELECT nvl(max(dvr.domain_value_range_id),0)+1 INTO ln_domain_value_range_id FROM DOMAIN_VALUE_RANGES dvr;
-  INSERT INTO DOMAIN_VALUE_RANGES (DOMAIN_VALUE_RANGE_ID,DOMAIN_ID,FROM_VALUE,TO_VALUE,ORDER_BY,STATUS)
-  VALUES (ln_domain_value_range_id,ln_domain_id1,'30','99999999',10,'A');
+  -- DOMAIN VALUE RANGES (NO APLICA)
 
   -- CONDITION PROPERTIES
   SELECT nvl(max(cp.condition_property_id),0)+1 INTO ln_condition_property_id1 FROM CONDITION_PROPERTIES cp;
-  INSERT INTO CONDITION_PROPERTIES (CONDITION_PROPERTY_ID,CONDITION_ID,SUBSCRIBER_PROPERTY_ID,DATA_TYPE,EXPRESSION_CONDITION,DOMAIN_ID,MIN_NUM_DOMAIN_ELEMENTS,MAX_NUM_DOMAIN_ELEMENTS,SUCCESS_MESSAGE,FAIL_MESSAGE)
-  VALUES (ln_condition_property_id1,ln_condition_id1, SP_DAYS_LAST_CHANGE,'NUMERIC','[SP>=DM]',ln_domain_id1,null,null,'Numero de dias mayor a 30','El numero de dias de su ultimo cambio, NO es mayor a 30');
+  INSERT INTO CONDITION_PROPERTIES (CONDITION_PROPERTY_ID,CONDITION_ID,SUBSCRIBER_PROPERTY_ID,ORDER_BY,DATA_TYPE,EXPRESSION_CONDITION,DOMAIN_ID,MIN_NUM_DOMAIN_ELEMENTS,MAX_NUM_DOMAIN_ELEMENTS,SUCCESS_MESSAGE,FAIL_MESSAGE)
+  VALUES (ln_condition_property_id1,ln_condition_id1,SP_ESTADO,10,'VARCHAR','[SP=DM]',ln_domain_id1,null,null,'No se encuentra el ICCID registrada en el repositorio eSIM','Si se encuentra el ICCID registrada en el repositorio eSIM');
 
-  SELECT nvl(max(cp.condition_property_id), 0)+1 INTO ln_condition_property_id2 FROM CONDITION_PROPERTIES cp;
-  INSERT INTO CONDITION_PROPERTIES (CONDITION_PROPERTY_ID,CONDITION_ID,SUBSCRIBER_PROPERTY_ID,DATA_TYPE,EXPRESSION_CONDITION,DOMAIN_ID,MIN_NUM_DOMAIN_ELEMENTS,MAX_NUM_DOMAIN_ELEMENTS,SUCCESS_MESSAGE,FAIL_MESSAGE)
-  VALUES (ln_condition_property_id2,ln_condition_id2,SP_CODE_CREDIT_ENGINE_CPM,'NUMERIC','[SP=DM]',ln_domain_id2,null,null,'La respuesta del motor de credito es exitosa','SEP=#'||SP_RESP_MESSAGE||'#Error Credit Engine, %s.');
-  
-  -- BEHAVIOUR VALIDATIONS
-  INSERT INTO behaviour_validations (BEHAVIOUR_VALIDATION_ID,BEHAVIOUR_OPER_STAGE_ID,DESCRIPTION,CONDITION_ID,ORDER_BY,SCHEDULE_ID,STATUS,NOTIFICATION_GROUP_ID,CONDITION_GROUP_ID)
-  VALUES ((SELECT NVL(MAX(T.behaviour_validation_id),0)+1 FROM behaviour_validations T),ln_beh_oper_stage_id2,'Valida que el numero de dias sea mayor a 30',ln_condition_id1,10,null,'A',null,'');
+  -- BEHAVIOUR ENCRICHMENT PROPERTY 2 
+  -- DESHABILITADO ?
+  INSERT INTO behaviour_enrichment_property (BEHAVIOUR_ENRICHE_PROPERTY_ID,BEHAVIOUR_OPER_STAGE_ID,CONDITION_ID,WHEN,ORDER_BY,SESSION_DATA,STATUS,CONDITION_GROUP_ID,DEFINED_FUNCTION_CALL_ID,EXECUTION_PRIORITY)
+  VALUES ((SELECT NVL(MAX(BP.BEHAVIOUR_ENRICHE_PROPERTY_ID),0)+1 FROM BEHAVIOUR_ENRICHMENT_PROPERTY BP),ln_beh_oper_stage_id1,ln_condition_id1,'POST',20,lv_data2,'I','',NULL,'CONDITION');
 
-  INSERT INTO behaviour_validations (BEHAVIOUR_VALIDATION_ID,BEHAVIOUR_OPER_STAGE_ID, DESCRIPTION, CONDITION_ID, ORDER_BY, SCHEDULE_ID,STATUS, NOTIFICATION_GROUP_ID, CONDITION_GROUP_ID)
-  VALUES ((SELECT NVL(MAX(T.behaviour_validation_id),0)+1 FROM behaviour_validations T),ln_beh_oper_stage_id4,'Valida la respuesta del Credit Enginee',ln_condition_id2,10,null,'A',null,'');
+  INSERT INTO behaviour_enrichment_property (BEHAVIOUR_ENRICHE_PROPERTY_ID,BEHAVIOUR_OPER_STAGE_ID,CONDITION_ID,WHEN,ORDER_BY,SESSION_DATA,STATUS,CONDITION_GROUP_ID,DEFINED_FUNCTION_CALL_ID,EXECUTION_PRIORITY,WHEN_CONDITION)
+  VALUES ((SELECT NVL(MAX(BP.BEHAVIOUR_ENRICHE_PROPERTY_ID),0)+1 FROM BEHAVIOUR_ENRICHMENT_PROPERTY BP),ln_beh_oper_stage_id2,ln_condition_id1,'POST',10,lv_data3,'A','',NULL,'CONDITION','FALSE');
 
   
   commit;
@@ -623,21 +623,17 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('BEH_OPERATION_ID: ' || ln_beh_operation_id);
   DBMS_OUTPUT.PUT_LINE('BEH_OPER_STAGE_INVOKE1: ' || ln_beh_oper_invoke_id1);
   DBMS_OUTPUT.PUT_LINE('BEH_OPER_STAGE_INVOKE2: ' || ln_beh_oper_invoke_id2);
-  DBMS_OUTPUT.PUT_LINE('BEH_OPER_STAGE_INVOKE3: ' || ln_beh_oper_invoke_id3);
-  DBMS_OUTPUT.PUT_LINE('EXTERNAL_RESOURCE_GROUPS_1: ' || ln_ext_res_group_id);
+  DBMS_OUTPUT.PUT_LINE('EXTERNAL_RESOURCE_GROUPS_1: ' || ln_ext_res_group_id1);
+  DBMS_OUTPUT.PUT_LINE('EXTERNAL_RESOURCE_GROUPS_2: ' || ln_ext_res_group_id2);
+  DBMS_OUTPUT.PUT_LINE('EXTERNAL_RESOURCE_GROUPS_3: ' || ln_ext_res_group_id3);
   DBMS_OUTPUT.PUT_LINE('INVOKE_ID_1: ' || ln_invoke_id1);
   DBMS_OUTPUT.PUT_LINE('INVOKE_ID_2: ' || ln_invoke_id2);
   DBMS_OUTPUT.PUT_LINE('INVOKE_ID_3: ' || ln_invoke_id3);
   DBMS_OUTPUT.PUT_LINE('EXTERNA_RESOURCES_1: ' || ln_ext_res_id1);
   DBMS_OUTPUT.PUT_LINE('EXTERNA_RESOURCES_2: ' || ln_ext_res_id2);
   DBMS_OUTPUT.PUT_LINE('EXTERNA_RESOURCES_3: ' || ln_ext_res_id3);
-  DBMS_OUTPUT.PUT_LINE('FUNCTION_DOMAIN: '||ln_function_dom_id||';');
-  DBMS_OUTPUT.PUT_LINE('FUNCTION: '||ln_function_id||';');
-  DBMS_OUTPUT.PUT_LINE('DEFINITION FUNCTION CALL: '||ln_def_func_call_id||';');
-  DBMS_OUTPUT.PUT_LINE('DOMAIN1: ' || ln_domain_id1);
-  DBMS_OUTPUT.PUT_LINE('CONDITION1: ' || ln_condition_id1);
-  DBMS_OUTPUT.PUT_LINE('DOMAIN2: ' || ln_domain_id2);
-  DBMS_OUTPUT.PUT_LINE('CONDITION2: ' || ln_condition_id2);
+  DBMS_OUTPUT.PUT_LINE('DOMAIN: ' || ln_domain_id1);
+  DBMS_OUTPUT.PUT_LINE('CONDITION: ' || ln_condition_id1);
 
   dbms_output.Put_line('ln_beh_operation_id number := '||ln_beh_operation_id||';');
   dbms_output.put_line('ln_beh_oper_stage_id1 number := '||ln_beh_oper_stage_id1||';');
@@ -646,19 +642,13 @@ BEGIN
   dbms_output.put_line('ln_beh_oper_stage_id4 number := '||ln_beh_oper_stage_id4||';');
   dbms_output.put_line('ln_beh_oper_stage_id5 number := '||ln_beh_oper_stage_id5||';');
   dbms_output.put_line('ln_beh_oper_invoke_id1 number := '||ln_beh_oper_invoke_id1||';');
-  dbms_output.Put_line('INVOKE ID1: '|| ln_invoke_id1 );
+  dbms_output.Put_line('INVOKE ID1 := '|| ln_invoke_id1 );
   dbms_output.put_line('ln_beh_oper_invoke_id2 number := '||ln_beh_oper_invoke_id2||';');
-  dbms_output.Put_line('INVOKE ID2: '|| ln_invoke_id2 );
-  dbms_output.put_line('ln_beh_oper_invoke_id3 number := '||ln_beh_oper_invoke_id3||';');
-  dbms_output.Put_line('INVOKE ID3: '|| ln_invoke_id3);
+  dbms_output.Put_line('INVOKE ID2 := '|| ln_invoke_id2 );
+  dbms_output.Put_line('INVOKE ID3 := '|| ln_invoke_id3);
 
-  dbms_output.put_line('ln_function_dom_id number := '||ln_function_dom_id||';');
-  dbms_output.put_line('ln_function_id number := '||ln_function_id||';');
-  dbms_output.put_line('ln_def_func_call_id number := '||ln_def_func_call_id||';');
-  dbms_output.put_line('ln_domain_id1 ' || ln_domain_id1);
-  dbms_output.put_line('ln_condition_id1 ' || ln_condition_id1);
-  dbms_output.put_line('ln_domain_id2 ' || ln_domain_id2);
-  dbms_output.put_line('ln_condition_id2 ' || ln_condition_id2);
+  dbms_output.put_line('ln_domain_id := ' || ln_domain_id1);
+  dbms_output.put_line('ln_condition_id := ' || ln_condition_id1);
 
   dbms_output.Put_line('---------------REFRESH------------------------------------');
   dbms_output.put_line('http://192.168.37.146:8101/quickWin/clearCampaignById/'||ln_campaign_id);
@@ -682,10 +672,6 @@ BEGIN
   dbms_output.Put_line('SELECT * FROM PRODUCT_TYPES T WHERE T.PRODUCT_TYPE_ID = '''||product_type_id1||''';');
   dbms_output.Put_line('SELECT * FROM PRODUCTS T WHERE T.PRODUCT_TYPE_ID = '''||product_type_id1||''';');
 
-  dbms_output.put_line('SELECT * FROM FUNCTIONS t where t.fuction_dom_id = '''||ln_function_dom_id||''';');
-  dbms_output.put_line('SELECT * FROM FUNCTION_DOMAINS t where t.function_dom_id = '''||ln_function_dom_id||''';');
-  dbms_output.put_line('SELECT * FROM DEFINED_FUNCTION_BINDINGS t where t.defined_function_call_id = '''||ln_def_func_call_id||''';');
-  dbms_output.put_line('SELECT * FROM DEFINED_FUNCTION_CALL t where t.defined_function_call_id = '''||ln_def_func_call_id||''';');
   dbms_output.put_line('SELECT * FROM behaviour_enrichment_property T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||' order by t.order_by;');
   dbms_output.put_line('SELECT * FROM DOMAIN_VALUE_RANGES t where t.domain_id = '''||ln_domain_id1||''';');
   dbms_output.put_line('SELECT * FROM DOMAIN_ELEMENTS t where t.domain_id = '''||ln_domain_id1||''';');
@@ -694,33 +680,29 @@ BEGIN
   dbms_output.put_line('SELECT * FROM CONDITION t where t.condition_id = '''||ln_condition_id1||''';');
   dbms_output.put_line('SELECT * FROM behaviour_validations T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||' order by t.order_by;');
 
-  dbms_output.put_line('SELECT * FROM DOMAIN_ELEMENTS t where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('SELECT * FROM DOMAIN t where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('SELECT * FROM CONDITION_PROPERTIES T WHERE T.CONDITION_ID = '''||ln_condition_id2||''';');
-  dbms_output.put_line('SELECT * FROM CONDITION t where t.condition_id = '''||ln_condition_id2||''';');
   dbms_output.put_line('SELECT * FROM behaviour_validations T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||' order by t.order_by;');
 
-  dbms_output.Put_line('---------------INVOKE QUERY ACCOUNT--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE CONFIRM ORDER--------------------------------------');
   dbms_output.Put_line('SELECT * FROM INVOKE T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
-  dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id||''';');
+  dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id1||''';');
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCES T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id1||''';');
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id1||''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_MAPPING T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.put_line('SELECT * FROM BEHAVIOUR_OPER_INVOKE T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||' order by t.order_by;');
 
-  dbms_output.Put_line('---------------INVOKE CREDIT ENGINE--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE MICROPERSISTOR--------------------------------------');
   dbms_output.Put_line('SELECT * FROM INVOKE T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
-  dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id||''';');
+  dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id2||''';');
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCES T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_MAPPING T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.put_line('SELECT * FROM BEHAVIOUR_OPER_INVOKE T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||' order by t.order_by;');
 
-  dbms_output.Put_line('---------------INVOKE CHANGE ACCOUNT--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE MICROEIS--------------------------------------');
   dbms_output.Put_line('SELECT * FROM INVOKE T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
-  dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = ''' || ln_ext_res_group_id || ''';');
+  dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = ''' || ln_ext_res_group_id3 || ''';');
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCES T WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_MAPPING T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
@@ -734,7 +716,7 @@ BEGIN
   dbms_output.Put_line('update products p set status = ''I'' where p.product_type_id = '''||product_type_id1||''';');
   dbms_output.Put_line('update product_types p set status = ''I'' where p.product_type_id = '''||product_type_id1||''';');
   dbms_output.Put_line('update campaign c set status = ''I'' where c.behaviour_id = '''||ln_behaviour_id||''';');
-  dbms_output.Put_line('update behaviour a set status = ''I'' where a.behaviour_id ='''||ln_behaviour_id||''';');
+  dbms_output.Put_line('update behaviour a set status = ''I'' where a.behaviour_id = '''||ln_behaviour_id||''';');
 
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPERATION_ID = '||ln_beh_operation_id||';');
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||';');
@@ -743,10 +725,6 @@ BEGIN
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||';');
 
-  dbms_output.put_line('UPDATE FUNCTIONS t set status = ''I'' where t.fuction_dom_id = '''||ln_function_dom_id||''';');
-  dbms_output.put_line('UPDATE FUNCTION_DOMAINS t set status = ''I'' where t.function_dom_id = '''||ln_function_dom_id||''';');
-  dbms_output.put_line('UPDATE DEFINED_FUNCTION_BINDINGS t set status = ''I'' where t.defined_function_call_id = '''||ln_def_func_call_id||''';');
-  dbms_output.put_line('UPDATE DEFINED_FUNCTION_CALL t set status = ''I'' where t.defined_function_call_id = '''||ln_def_func_call_id||''';');
   dbms_output.put_line('update behaviour_enrichment_property t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
   dbms_output.put_line('UPDATE DOMAIN_VALUE_RANGES t set status = ''I'' where t.domain_id = '''||ln_domain_id1||''';');
   dbms_output.put_line('UPDATE DOMAIN_ELEMENTS t set status = ''I'' where t.domain_id = '''||ln_domain_id1||''';');
@@ -755,33 +733,29 @@ BEGIN
   dbms_output.put_line('UPDATE CONDITION t set status = ''I'' where t.condition_id = '''||ln_condition_id1||''';');
   dbms_output.put_line('update behaviour_validations t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
 
-  dbms_output.put_line('UPDATE DOMAIN_ELEMENTS t set status = ''I'' where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('UPDATE DOMAIN t set status = ''I'' where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('UPDATE CONDITION_PROPERTIES T set status = ''I'' WHERE T.CONDITION_ID = '''||ln_condition_id2||''';');
-  dbms_output.put_line('UPDATE CONDITION t set status = ''I'' where t.condition_id = '''||ln_condition_id2||''';');
   dbms_output.put_line('update behaviour_validations t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
 
-  dbms_output.Put_line('---------------INVOKE QUERY ACCOUNT--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE CONFIRMORDER--------------------------------------');
   dbms_output.Put_line('update INVOKE T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
-  dbms_output.Put_line('update EXTERNAL_RESOURCE_GROUPS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id||''';');
+  dbms_output.Put_line('update EXTERNAL_RESOURCE_GROUPS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id1||''';');
   dbms_output.Put_line('update EXTERNAL_RESOURCES T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id1||''';');
   dbms_output.Put_line('update EXTERNAL_RESOURCE_COMPONENTS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id1||''';');
   dbms_output.Put_line('update INVOKE_MAPPING T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.Put_line('update INVOKE_RESPONSE_EVALUATION T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.put_line('update BEHAVIOUR_OPER_INVOKE t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||';');
 
-  dbms_output.Put_line('---------------INVOKE CREDIT ENGINE--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE MICROPERSISTOR--------------------------------------');
   dbms_output.Put_line('update INVOKE T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
-  dbms_output.Put_line('update EXTERNAL_RESOURCE_GROUPS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id||''';');
+  dbms_output.Put_line('update EXTERNAL_RESOURCE_GROUPS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id2||''';');
   dbms_output.Put_line('update EXTERNAL_RESOURCES T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   dbms_output.Put_line('update EXTERNAL_RESOURCE_COMPONENTS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   dbms_output.Put_line('update INVOKE_MAPPING T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.Put_line('update INVOKE_RESPONSE_EVALUATION T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.put_line('update BEHAVIOUR_OPER_INVOKE t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||';');
 
-  dbms_output.Put_line('---------------INVOKE CHANGE ACCOUNT--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE MICROEIS--------------------------------------');
   dbms_output.Put_line('update INVOKE T set status = ''I'' WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
-  dbms_output.Put_line('update EXTERNAL_RESOURCE_GROUPS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_GROUP_ID = ''' || ln_ext_res_group_id || ''';');
+  dbms_output.Put_line('update EXTERNAL_RESOURCE_GROUPS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_GROUP_ID = ''' || ln_ext_res_group_id3 || ''';');
   dbms_output.Put_line('update EXTERNAL_RESOURCES T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   dbms_output.Put_line('update EXTERNAL_RESOURCE_COMPONENTS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   dbms_output.Put_line('update INVOKE_MAPPING T set status = ''I'' WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
@@ -805,10 +779,6 @@ BEGIN
   dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
   dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||';');
 
-  dbms_output.put_line('DELETE FROM FUNCTIONS t where t.fuction_dom_id = '''||ln_function_dom_id||''';');
-  dbms_output.put_line('DELETE FROM FUNCTION_DOMAINS t where t.function_dom_id = '''||ln_function_dom_id||''';');
-  dbms_output.put_line('DELETE FROM DEFINED_FUNCTION_BINDINGS t where t.defined_function_call_id = '''||ln_def_func_call_id||''';');
-  dbms_output.put_line('DELETE FROM DEFINED_FUNCTION_CALL t where t.defined_function_call_id = '''||ln_def_func_call_id||''';');
   dbms_output.put_line('DELETE behaviour_enrichment_property b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
   dbms_output.put_line('DELETE FROM DOMAIN_VALUE_RANGES t where t.domain_id = '''||ln_domain_id1||''';');
   dbms_output.put_line('DELETE FROM DOMAIN_ELEMENTS t where t.domain_id = '''||ln_domain_id1||''';');
@@ -817,14 +787,9 @@ BEGIN
   dbms_output.put_line('DELETE FROM CONDITION t where t.condition_id = '''||ln_condition_id1||''';');
   dbms_output.put_line('delete behaviour_validations b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
 
-  dbms_output.put_line('DELETE FROM DOMAIN_VALUE_RANGES t where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('DELETE FROM DOMAIN_ELEMENTS t where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('DELETE FROM DOMAIN t where t.domain_id = '''||ln_domain_id2||''';');
-  dbms_output.put_line('DELETE FROM CONDITION_PROPERTIES T WHERE T.CONDITION_ID = '''||ln_condition_id2||''';');
-  dbms_output.put_line('DELETE FROM CONDITION t where t.condition_id = '''||ln_condition_id2||''';');
   dbms_output.put_line('delete behaviour_validations b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
 
-  dbms_output.Put_line('---------------INVOKE QUERY ACCOUNT--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE CONFIRMORDER--------------------------------------');
   dbms_output.Put_line('DELETE INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.put_line('DELETE INVOKE_MAPPING T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.Put_line('DELETE EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id1||''';');
@@ -833,7 +798,7 @@ BEGIN
   dbms_output.Put_line('DELETE INVOKE T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
   dbms_output.put_line('DELETE BEHAVIOUR_OPER_INVOKE b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||';');
 
-  dbms_output.Put_line('---------------INVOKE CREDIT ENGINE--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE MICROPERSISTOR--------------------------------------');
   dbms_output.Put_line('delete INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.put_line('delete INVOKE_MAPPING T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.Put_line('delete EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
@@ -842,7 +807,7 @@ BEGIN
   dbms_output.Put_line('delete INVOKE T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.put_line('delete BEHAVIOUR_OPER_INVOKE b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||';');
 
-  dbms_output.Put_line('---------------INVOKE CHANGE ACCOUNT--------------------------------------');
+  dbms_output.Put_line('---------------INVOKE MICROEIS--------------------------------------');
   dbms_output.Put_line('delete INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
   dbms_output.put_line('delete INVOKE_MAPPING T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
   dbms_output.Put_line('delete EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
