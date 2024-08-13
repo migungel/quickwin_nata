@@ -514,7 +514,7 @@ BEGIN
     'A'
   );
 
-  --response evalutaion (ESTAN DESHABILITADOS)
+  --response evalutaion
   INSERT INTO invoke_response_evaluation
   (
     invoke_response_evaluation_id,
