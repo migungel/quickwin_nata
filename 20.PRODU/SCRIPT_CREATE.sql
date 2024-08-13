@@ -638,14 +638,11 @@ BEGIN
   dbms_output.Put_line('ln_beh_operation_id number := '||ln_beh_operation_id||';');
   dbms_output.put_line('ln_beh_oper_stage_id1 number := '||ln_beh_oper_stage_id1||';');
   dbms_output.put_line('ln_beh_oper_stage_id2 number := '||ln_beh_oper_stage_id2||';');
-  dbms_output.put_line('ln_beh_oper_stage_id3 number := '||ln_beh_oper_stage_id3||';');
-  dbms_output.put_line('ln_beh_oper_stage_id4 number := '||ln_beh_oper_stage_id4||';');
-  dbms_output.put_line('ln_beh_oper_stage_id5 number := '||ln_beh_oper_stage_id5||';');
   dbms_output.put_line('ln_beh_oper_invoke_id1 number := '||ln_beh_oper_invoke_id1||';');
   dbms_output.Put_line('INVOKE ID1 := '|| ln_invoke_id1 );
   dbms_output.put_line('ln_beh_oper_invoke_id2 number := '||ln_beh_oper_invoke_id2||';');
   dbms_output.Put_line('INVOKE ID2 := '|| ln_invoke_id2 );
-  dbms_output.Put_line('INVOKE ID3 := '|| ln_invoke_id3);
+  dbms_output.Put_line('INVOKE ID3 := '|| ln_invoke_id3 );
 
   dbms_output.put_line('ln_domain_id := ' || ln_domain_id1);
   dbms_output.put_line('ln_condition_id := ' || ln_condition_id1);
@@ -662,9 +659,7 @@ BEGIN
 
   dbms_output.put_line('SELECT * FROM behaviour_oper_stages T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||' order by t.order_by;');
   dbms_output.put_line('SELECT * FROM behaviour_oper_stages T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||' order by t.order_by;');
-  dbms_output.put_line('SELECT * FROM behaviour_oper_stages T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||' order by t.order_by;');
-  dbms_output.put_line('SELECT * FROM behaviour_oper_stages T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||' order by t.order_by;');
-  dbms_output.put_line('SELECT * FROM behaviour_oper_stages T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||' order by t.order_by;');
+  dbms_output.put_line('SELECT * FROM behaviour_enrichment T WHERE T.BEHAVIOUR_OPER_STAGE_ID = ' || ln_beh_oper_stage_id1 || ' ORDER BY t.order_by;');
 
   dbms_output.Put_line('SELECT * FROM BEHAVIOUR_PRODUCT T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '''||ln_beh_oper_stage_id1||''';');
   dbms_output.Put_line('SELECT * FROM offer_products T WHERE T.offer_id = '''||ln_offer_id1||''';');
@@ -679,8 +674,6 @@ BEGIN
   dbms_output.put_line('SELECT * FROM CONDITION_PROPERTIES T WHERE T.CONDITION_ID = '''||ln_condition_id1||''';');
   dbms_output.put_line('SELECT * FROM CONDITION t where t.condition_id = '''||ln_condition_id1||''';');
   dbms_output.put_line('SELECT * FROM behaviour_validations T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||' order by t.order_by;');
-
-  dbms_output.put_line('SELECT * FROM behaviour_validations T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||' order by t.order_by;');
 
   dbms_output.Put_line('---------------INVOKE CONFIRM ORDER--------------------------------------');
   dbms_output.Put_line('SELECT * FROM INVOKE T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
@@ -698,7 +691,6 @@ BEGIN
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_MAPPING T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
-  dbms_output.put_line('SELECT * FROM BEHAVIOUR_OPER_INVOKE T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||' order by t.order_by;');
 
   dbms_output.Put_line('---------------INVOKE MICROEIS--------------------------------------');
   dbms_output.Put_line('SELECT * FROM INVOKE T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
@@ -707,7 +699,6 @@ BEGIN
   dbms_output.Put_line('SELECT * FROM EXTERNAL_RESOURCE_COMPONENTS T WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_MAPPING T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
   dbms_output.Put_line('SELECT * FROM INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
-  dbms_output.put_line('SELECT * FROM BEHAVIOUR_OPER_INVOKE T WHERE T.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||' order by t.order_by;');
 
   dbms_output.Put_line('--------------UPDATE STATUS---------------------------------------');
   dbms_output.Put_line('update offer_products t set status = ''I'' where t.offer_id = '''||ln_offer_id1||''';');
@@ -721,9 +712,7 @@ BEGIN
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPERATION_ID = '||ln_beh_operation_id||';');
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||';');
   dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
-  dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||';');
-  dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
-  dbms_output.put_line('update behaviour_oper_stages t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||';');
+  dbms_output.put_line('UPDATE behaviour_enrichment T SET status = ''I'' WHERE T.BEHAVIOUR_OPER_STAGE_ID = ' || ln_beh_oper_stage_id1 || ';');
 
   dbms_output.put_line('update behaviour_enrichment_property t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
   dbms_output.put_line('UPDATE DOMAIN_VALUE_RANGES t set status = ''I'' where t.domain_id = '''||ln_domain_id1||''';');
@@ -732,8 +721,6 @@ BEGIN
   dbms_output.put_line('UPDATE CONDITION_PROPERTIES T set status = ''I'' WHERE T.CONDITION_ID = '''||ln_condition_id1||''';');
   dbms_output.put_line('UPDATE CONDITION t set status = ''I'' where t.condition_id = '''||ln_condition_id1||''';');
   dbms_output.put_line('update behaviour_validations t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
-
-  dbms_output.put_line('update behaviour_validations t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
 
   dbms_output.Put_line('---------------INVOKE CONFIRMORDER--------------------------------------');
   dbms_output.Put_line('update INVOKE T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
@@ -751,7 +738,6 @@ BEGIN
   dbms_output.Put_line('update EXTERNAL_RESOURCE_COMPONENTS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   dbms_output.Put_line('update INVOKE_MAPPING T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
   dbms_output.Put_line('update INVOKE_RESPONSE_EVALUATION T set status = ''I'' WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
-  dbms_output.put_line('update BEHAVIOUR_OPER_INVOKE t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||';');
 
   dbms_output.Put_line('---------------INVOKE MICROEIS--------------------------------------');
   dbms_output.Put_line('update INVOKE T set status = ''I'' WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
@@ -760,7 +746,6 @@ BEGIN
   dbms_output.Put_line('update EXTERNAL_RESOURCE_COMPONENTS T set status = ''I'' WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   dbms_output.Put_line('update INVOKE_MAPPING T set status = ''I'' WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
   dbms_output.Put_line('update INVOKE_RESPONSE_EVALUATION T set status = ''I'' WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
-  dbms_output.put_line('update BEHAVIOUR_OPER_INVOKE t set status = ''I'' where t.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||';');
 
   dbms_output.Put_line('--------------DELETE---------------------------------------');
   dbms_output.Put_line('DELETE behaviour_oper_stages b where b.behaviour_operation_id = '''||ln_beh_operation_id||''';');
@@ -775,9 +760,7 @@ BEGIN
 
   dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id1||';');
   dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
-  dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||';');
-  dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
-  dbms_output.put_line('delete behaviour_oper_stages b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||';');
+  dbms_output.put_line('DELETE behaviour_enrichment B WHERE B.BEHAVIOUR_OPER_STAGE_ID = ' || ln_beh_oper_stage_id1 || ';');
 
   dbms_output.put_line('DELETE behaviour_enrichment_property b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
   dbms_output.put_line('DELETE FROM DOMAIN_VALUE_RANGES t where t.domain_id = '''||ln_domain_id1||''';');
@@ -786,8 +769,6 @@ BEGIN
   dbms_output.put_line('DELETE FROM CONDITION_PROPERTIES T WHERE T.CONDITION_ID = '''||ln_condition_id1||''';');
   dbms_output.put_line('DELETE FROM CONDITION t where t.condition_id = '''||ln_condition_id1||''';');
   dbms_output.put_line('delete behaviour_validations b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id2||';');
-
-  dbms_output.put_line('delete behaviour_validations b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id4||';');
 
   dbms_output.Put_line('---------------INVOKE CONFIRMORDER--------------------------------------');
   dbms_output.Put_line('DELETE INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = '''||ln_invoke_id1||''';');
@@ -805,7 +786,6 @@ BEGIN
   dbms_output.Put_line('delete EXTERNAL_RESOURCES T WHERE T.EXTERNAL_RESOURCE_ID = '''||ln_ext_res_id2||''';');
   -- dbms_output.Put_line('delete EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = '''||ln_ext_res_group_id||''';');
   dbms_output.Put_line('delete INVOKE T WHERE T.INVOKE_ID = '''||ln_invoke_id2||''';');
-  dbms_output.put_line('delete BEHAVIOUR_OPER_INVOKE b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id3||';');
 
   dbms_output.Put_line('---------------INVOKE MICROEIS--------------------------------------');
   dbms_output.Put_line('delete INVOKE_RESPONSE_EVALUATION T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
@@ -814,7 +794,6 @@ BEGIN
   dbms_output.Put_line('delete EXTERNAL_RESOURCES T WHERE T.EXTERNAL_RESOURCE_ID = ''' || ln_ext_res_id3 || ''';');
   -- dbms_output.Put_line('delete EXTERNAL_RESOURCE_GROUPS T WHERE T.EXTERNAL_RESOURCE_GROUP_ID = ''' || ln_ext_res_group_id || ''';');
   dbms_output.Put_line('delete INVOKE T WHERE T.INVOKE_ID = ''' || ln_invoke_id3 || ''';');
-  dbms_output.put_line('delete BEHAVIOUR_OPER_INVOKE b where b.BEHAVIOUR_OPER_STAGE_ID = '||ln_beh_oper_stage_id5||';');
 
   dbms_output.Put_line('---------------REQUEST----------------------------------------------');
   dbms_output.Put_line('http://192.168.37.146:8101/quickWin/getActivateRequest');
